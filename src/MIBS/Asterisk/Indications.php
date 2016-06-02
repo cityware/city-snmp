@@ -6,8 +6,6 @@ namespace Cityware\Snmp\MIBS\Asterisk;
  * A class for performing SNMP V2 queries on Asterisk
  *
  * @see https://wiki.asterisk.org/wiki/display/AST/Asterisk+MIB+Definitions
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Indications extends \Cityware\Snmp\MIB
 {

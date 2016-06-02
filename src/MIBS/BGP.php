@@ -6,8 +6,6 @@ namespace Cityware\Snmp\MIBS;
  * A class for performing SNMP V2 BGP queries
  *
  * @see http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en&translate=Translate&objectInput=1.3.6.1.2.1.15
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class BGP extends \Cityware\Snmp\MIB
 {

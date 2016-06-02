@@ -4,9 +4,6 @@ namespace Cityware\Snmp\MIBS\Cisco;
 
 /**
  * A class for performing SNMP V2 queries on generic devices.
- *
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Sergio Gómez Bachiller <sergio@uco.es>
  */
 class VlanMembership extends \Cityware\Snmp\MIBS\Cisco
 {

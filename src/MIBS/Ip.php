@@ -4,9 +4,6 @@ namespace Cityware\Snmp\MIBS;
 
 /**
  * A class for performing SNMP V2 queries on generic devices
- *
- * @copyright Copyright (c) 2012 - 2016, Open Source Solutions Limited, Dublin, Ireland
- * @author Luis Alberto Herrero <laherre@unizar.es>
  */
 class Ip extends \Cityware\Snmp\MIB
 {

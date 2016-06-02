@@ -6,8 +6,6 @@ namespace Cityware\Snmp\MIBS;
  * A class for obtaining route information using ipCidrRouteTable information.
  *
  * @see http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en&translate=Translate&objectInput=1.3.6.1.2.1.4.24.4.1#oidContent
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Dave Hope <dave@hope.mx>
  */
 class Routes extends \Cityware\Snmp\MIB
 {

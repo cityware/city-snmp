@@ -6,9 +6,6 @@ namespace Cityware\Snmp\MIBS\Extreme\System;
  * A class for performing SNMP V2 queries on Extreme devices
  *
  * These OIDs are from the private.extremenetworks.extremeAgent.extremeSystem.extremeSystemCommon tree
- *
- * @copyright Copyright (c) 2013 - 2014, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Common extends \Cityware\Snmp\MIBS\Extreme\System
 {

@@ -6,8 +6,6 @@ namespace Cityware\Snmp\MIBS\Extreme;
  * A class for performing SNMP V2 VLAN queries on Extreme devices
  *
  * @see http://www.extremenetworks.com/products/mibs.aspx
- * @copyright Copyright (c) 2012 - 2013, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Vlan extends \Cityware\Snmp\MIBS\Extreme
 {

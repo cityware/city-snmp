@@ -4,9 +4,6 @@ namespace Cityware\Snmp;
 
 /**
  * Parent class for all "MIB" extensions.
- *
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class MIB
 {

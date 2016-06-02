@@ -4,9 +4,6 @@ namespace Cityware\Snmp\Cache;
 
 /**
  * basic (array) cache implementation
- *
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Basic extends \Cityware\Snmp\Cache
 {

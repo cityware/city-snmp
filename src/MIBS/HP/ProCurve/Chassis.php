@@ -4,9 +4,6 @@ namespace Cityware\Snmp\MIBS\HP\ProCurve;
 
 /**
  * A class for performing SNMP V2 queries on HP ProCurve devices
- *
- * @copyright Copyright (c) 2013, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Chassis extends \Cityware\Snmp\MIBS\Foundry
 {

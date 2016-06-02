@@ -9,9 +9,6 @@ namespace Cityware\Snmp\MIBS\MRV;
  *
  * @see http://service.mrv.com/downloads/mibs5.3.2.zip
  * @see http://service.mrv.com/support/tech_docs/36/974
- *
- * @copyright Copyright (c) 2013, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class System extends \Cityware\Snmp\MIB
 {

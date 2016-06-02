@@ -4,9 +4,6 @@ namespace Cityware\Snmp\Cache;
 
 /**
  * APC cache implementation
- *
- * @copyright Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class APC extends \Cityware\Snmp\Cache
 {

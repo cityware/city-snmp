@@ -4,9 +4,6 @@ namespace Cityware\Snmp\MIBS\Cisco;
 
 /**
  * A class for performing SNMP V2 queries on Cisco devices
- *
- * @copyright Copyright (c) 2012-2016, Open Source Solutions Limited, Dublin, Ireland
- * @author Luis Alberto Herrero <laherre@unizar.es>
  */
 class PAGP extends \Cityware\Snmp\MIBS\Cisco
 {

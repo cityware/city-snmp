@@ -5,9 +5,6 @@ namespace Cityware\Snmp;
 
 /**
  * A class for parsing device / host / platform details
- *
- * @copyright Copyright (c) 2012 - 2013, Open Source Solutions Limited, Dublin, Ireland
- * @author Barry O'Donovan <barry@opensolutions.ie>
  */
 class Platform
 {
