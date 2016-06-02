@@ -4,9 +4,6 @@
     Copyright (c) 2012, Open Source Solutions Limited, Dublin, Ireland
     All rights reserved.
 
-    Contact: Barry O'Donovan - barry (at) opensolutions (dot) ie
-             http://www.opensolutions.ie/
-
     This file is part of the Cityware\Snmp package.
 
     Redistribution and use in source and binary forms, with or without
