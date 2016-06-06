@@ -2,12 +2,11 @@
 
 namespace Cityware\Snmp;
 
-
 /**
  * A class for parsing device / host / platform details
  */
-class Platform
-{
+class Platform {
+
     /**
      * The platform vendor
      *
@@ -57,39 +56,35 @@ class Platform
      */
     protected $_snmpHost;
 
-
     /**
      * The constructor.
      *
      * @param SNMP $snmpHost The SNMP Host object
      * @return Platform An instance of $this (for fluent interfaces)
      */
-    public function __construct( $snmpHost )
-    {
-        $this->setSNMPHost( $snmpHost );
+    public function __construct($snmpHost) {
+        $this->setSNMPHost($snmpHost);
 
         $this->parse();
 
         return $this;
     }
 
-
-
-    public function parse()
-    {
+    public function parse() {
         // query the platform for it's description and parse it for details
 
-        $sysDescr    = $this->getSNMPHost()->useSystem()->description();
+        $sysDescr = $this->getSNMPHost()->useSystem()->description();
 
         try {
-            $sysObjectId =  $this->getSNMPHost()->useSystem()->systemObjectID();
-        } catch( Exception $e ){
+            $sysObjectId = $this->getSNMPHost()->useSystem()->systemObjectID();
+        } catch (Exception $e) {
             $sysObjectId = null;
         }
-        
+
         // there's possibly a better way to do this...?
-        foreach( glob(  __DIR__ . '/Platforms/vendor_*.php' ) as $f )
+        foreach (glob(__DIR__ . '/Platforms/vendor_*.php') as $f) {
             include( $f );
+        }
     }
 
     /**
@@ -98,8 +93,7 @@ class Platform
      * @param \Cityware\Snmp\SNMP $s The SNMP Host object
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setSNMPHost( $s )
-    {
+    public function setSNMPHost($s) {
         $this->_snmpHost = $s;
         return $this;
     }
@@ -109,8 +103,7 @@ class Platform
      *
      * @return \Cityware\Snmp\SNMP The SNMP object
      */
-    public function getSNMPHost()
-    {
+    public function getSNMPHost() {
         return $this->_snmpHost;
     }
 
@@ -120,8 +113,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setVendor( $s )
-    {
+    public function setVendor($s) {
         $this->_vendor = $s;
         return $this;
     }
@@ -132,8 +124,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setModel( $s )
-    {
+    public function setModel($s) {
         $this->_model = $s;
         return $this;
     }
@@ -144,8 +135,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setOs( $s )
-    {
+    public function setOs($s) {
         $this->_os = $s;
         return $this;
     }
@@ -156,8 +146,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setOsVersion( $s )
-    {
+    public function setOsVersion($s) {
         $this->_osver = $s;
         return $this;
     }
@@ -168,8 +157,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setOsDate( $s )
-    {
+    public function setOsDate($s) {
         $this->_osdate = $s;
         return $this;
     }
@@ -180,8 +168,7 @@ class Platform
      * @param string $s
      * @return \Cityware\Snmp\Platform For fluent interfaces
      */
-    public function setSerialNumber( $s )
-    {
+    public function setSerialNumber($s) {
         $this->_serial = $s;
         return $this;
     }
@@ -191,8 +178,7 @@ class Platform
      *
      * @return string
      */
-    public function getVendor()
-    {
+    public function getVendor() {
         return $this->_vendor;
     }
 
@@ -201,8 +187,7 @@ class Platform
      *
      * @return string
      */
-    public function getModel()
-    {
+    public function getModel() {
         return $this->_model;
     }
 
@@ -211,8 +196,7 @@ class Platform
      *
      * @return string
      */
-    public function getOs()
-    {
+    public function getOs() {
         return $this->_os;
     }
 
@@ -221,8 +205,7 @@ class Platform
      *
      * @return string
      */
-    public function getOsVersion()
-    {
+    public function getOsVersion() {
         return $this->_osver;
     }
 
@@ -231,8 +214,7 @@ class Platform
      *
      * return \DateTime
      */
-    public function getOsDate()
-    {
+    public function getOsDate() {
         return $this->_osdate;
     }
 
@@ -241,8 +223,7 @@ class Platform
      *
      * return string
      */
-    public function getSerialNumber()
-    {
+    public function getSerialNumber() {
         return $this->_serial;
     }
 
