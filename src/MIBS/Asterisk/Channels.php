@@ -223,18 +223,6 @@ class Channels extends \Cityware\Snmp\MIB
 
         return $details;
     }
-
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
     
     /**
      * Active Channel Information: Name of the current channel.
