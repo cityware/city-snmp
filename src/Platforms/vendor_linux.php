@@ -7,28 +7,15 @@
 // Linux ixleeds1 3.11.0-23-generic #40-Ubuntu SMP Wed Jun 4 21:05:23 UTC 2014 x86_64
 
 if (substr($sysDescr, 0, 6) == 'Linux ') {
-    if (preg_match('/Linux ([^ ]+) ([^ ]+)\+([^ ]+) #([^ ]+) SMP ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+)/', $sysDescr, $matches)) {
+    $matches = explode(" ", $sysDescr);
+    if ($matches[4] == 'SMP') {
         $this->setVendor('Cumulus Networks');
-        $this->setModel('Generic');
-        $this->setOs('Linux');
-        $this->setOsVersion($matches[2]);
-        $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
-        $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
-    } else if (preg_match('/Linux ([^ ]+) ([^ ]+)-([^ ]+) #[^ ]+-([^ ]+) SMP ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) ([^ ]+) (.*)/', $sysDescr, $matches)) {
-        $this->setVendor($matches[4]);
-        $this->setModel('Generic');
-        $this->setOs('Linux');
-        $this->setOsVersion($matches[2]);
-        $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
-        $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
     } else {
-
-        $matches = explode(" ", $sysDescr);
-        $this->setVendor($matches[3]);
-        $this->setModel('Generic');
-        $this->setOs('Linux');
-        $this->setOsVersion($matches[2]);
-        $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
-        $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
+        $this->setVendor($matches[4]);
     }
+    $this->setModel('Generic');
+    $this->setOs('Linux');
+    $this->setOsVersion($matches[2]);
+    $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
+    $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
 }
