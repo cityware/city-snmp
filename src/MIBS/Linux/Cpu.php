@@ -25,6 +25,78 @@ class Cpu extends \Cityware\Snmp\MIB {
     const OID_RAW_IDLE_CPU_TIME = '.1.3.6.1.4.1.2021.11.53.0';
     
     /**
+     * Returns Float Number witch Load CPU in One Minute
+     * @return float
+     */
+    public function loadOneMinute() {
+        return (float) $this->getSNMP()->get(self::OID_1_MINUTE_LOAD);
+    }
+    
+    /**
+     * Returns Float Number witch Load CPU in Five Minutes
+     * @return float
+     */
+    public function loadFiveMinutes() {
+        return (float) $this->getSNMP()->get(self::OID_5_MINUTE_LOAD);
+    }
+    
+    /**
+     * Returns Float Number witch Load CPU in Fifteen Minutes
+     * @return float
+     */
+    public function loadFifteenMinutes() {
+        return (float) $this->getSNMP()->get(self::OID_15_MINUTE_LOAD);
+    }
+    
+    /**
+     * Returns Integer Number witch Load CPU in One Minute
+     * @return Integer
+     */
+    public function loadIntOneMinute() {
+        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_1);
+    }
+    
+    /**
+     * Returns Integer Number witch Load CPU in Five Minutes
+     * @return Integer
+     */
+    public function loadIntFiveMinutes() {
+        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_5);
+    }
+    
+    /**
+     * Returns Integer Number witch Load CPU in Fifteen Minutes
+     * @return Integer
+     */
+    public function loadIntFifteenMinutes() {
+        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_15);
+    }
+        
+    /**
+     * Returns Percentage of User CPU Time
+     * @return float
+     */
+    public function percentageOfUserCpuTime() {
+        return (float) $this->getSNMP()->get(self::OID_PERCENTAGE_OF_USER_CPU_TIME);
+    }
+    
+    /**
+     * Returns Percentage of System CPU Time
+     * @return float
+     */
+    public function percentageOfSystemCpuTime() {
+        return (float) $this->getSNMP()->get(self::OID_PERCENTAGES_OF_SYSTEM_CPU_TIME);
+    }
+    
+    /**
+     * Returns Percentage of Idle CPU Time
+     * @return float
+     */
+    public function percentageOfIdleCpuTime() {
+        return (float) $this->getSNMP()->get(self::OID_PERCENTAGES_OF_IDLE_CPU_TIME);
+    }
+    
+    /**
      * Returns Raw User CPU Time
      * @return float
      */
@@ -54,77 +126,5 @@ class Cpu extends \Cityware\Snmp\MIB {
      */
     public function rawIdleCpuTime() {
         return (float) $this->getSNMP()->get(self::OID_RAW_IDLE_CPU_TIME);
-    }
-        
-    /**
-     * Returns Percentage of User CPU Time
-     * @return float
-     */
-    public function percentageOfUserCpuTime() {
-        return (float) $this->getSNMP()->get(self::OID_PERCENTAGE_OF_USER_CPU_TIME);
-    }
-    
-    /**
-     * Returns Percentage of System CPU Time
-     * @return float
-     */
-    public function percentageOfSystemCpuTime() {
-        return (float) $this->getSNMP()->get(self::OID_PERCENTAGES_OF_SYSTEM_CPU_TIME);
-    }
-    
-    /**
-     * Returns Percentage of Idle CPU Time
-     * @return float
-     */
-    public function percentageOfIdleCpuTime() {
-        return (float) $this->getSNMP()->get(self::OID_PERCENTAGES_OF_IDLE_CPU_TIME);
-    }
-
-    /**
-     * Returns Float Number witch Load CPU in One Minute
-     * @return float
-     */
-    public function loadOneMinute() {
-        return (float) $this->getSNMP()->get(self::OID_1_MINUTE_LOAD);
-    }
-    
-    /**
-     * Returns Float Number witch Load CPU in Five Minutes
-     * @return float
-     */
-    public function loadFiveMinutes() {
-        return (float) $this->getSNMP()->get(self::OID_TOTAL_SWAP_SIZE);
-    }
-    
-    /**
-     * Returns Float Number witch Load CPU in Fifteen Minutes
-     * @return float
-     */
-    public function loadFifteenMinutes() {
-        return (float) $this->getSNMP()->get(self::OID_TOTAL_SWAP_SIZE);
-    }
-    
-    /**
-     * Returns Integer Number witch Load CPU in One Minute
-     * @return Integer
-     */
-    public function loadIntOneMinute() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_1);
-    }
-    
-    /**
-     * Returns Integer Number witch Load CPU in Five Minutes
-     * @return Integer
-     */
-    public function loadIntFiveMinutes() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_5);
-    }
-    
-    /**
-     * Returns Integer Number witch Load CPU in Fifteen Minutes
-     * @return Integer
-     */
-    public function loadIntFifteenMinutes() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_15);
     }
 }
