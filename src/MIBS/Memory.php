@@ -9,7 +9,6 @@ class Memory extends \Cityware\Snmp\MIB
 {
     const OID_TOTAL_SWAP_SIZE                = '.1.3.6.1.4.1.2021.4.3.0';
     const OID_AVALIABLE_SWAP_SPACE           = '.1.3.6.1.4.1.2021.4.4.0';
-    
     const OID_TOTAL_RAM_IN_MACHINE           = '.1.3.6.1.4.1.2021.4.5.0';
     const OID_TOTAL_RAM_USED                 = '.1.3.6.1.4.1.2021.4.6.0';
     const OID_TOTAL_RAM_FREE                 = '.1.3.6.1.4.1.2021.4.11.0';
