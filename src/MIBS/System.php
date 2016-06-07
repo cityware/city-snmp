@@ -5,24 +5,23 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class System extends \Cityware\Snmp\MIB
-{
+class System extends \Cityware\Snmp\MIB {
+
     const OID_SYSTEM_DESCRIPTION = '.1.3.6.1.2.1.1.1.0';
-    const OID_SYSTEM_OBJECT_ID   = '.1.3.6.1.2.1.1.2.0';
-    const OID_SYSTEM_UPTIME      = '.1.3.6.1.2.1.25.1.1.0';
-    const OID_SYSTEM_CONTACT     = '.1.3.6.1.2.1.1.4.0';
-    const OID_SYSTEM_NAME        = '.1.3.6.1.2.1.1.5.0';
-    const OID_SYSTEM_LOCATION    = '.1.3.6.1.2.1.1.6.0';
-    const OID_SYSTEM_SERVICES    = '.1.3.6.1.2.1.1.7.0';
+    const OID_SYSTEM_OBJECT_ID = '.1.3.6.1.2.1.1.2.0';
+    const OID_SYSTEM_UPTIME = '.1.3.6.1.2.1.25.1.1.0';
+    const OID_SYSTEM_CONTACT = '.1.3.6.1.2.1.1.4.0';
+    const OID_SYSTEM_NAME = '.1.3.6.1.2.1.1.5.0';
+    const OID_SYSTEM_LOCATION = '.1.3.6.1.2.1.1.6.0';
+    const OID_SYSTEM_SERVICES = '.1.3.6.1.2.1.1.7.0';
 
     /**
      * Returns the system description of the device
      *
      * @return string The system description of the device
      */
-    public function description()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_DESCRIPTION );
+    public function description() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_DESCRIPTION);
     }
 
     /**
@@ -41,12 +40,9 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return string The system object ID
      */
-    public function systemObjectID()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_OBJECT_ID );
+    public function systemObjectID() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_OBJECT_ID);
     }
-
-
 
     /**
      * Returns the system uptime of the device in seconds
@@ -57,9 +53,8 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return int The system uptime of the device (in timeticks)
      */
-    public function uptime()
-    {
-        return round($this->getSNMP()->get( self::OID_SYSTEM_UPTIME ) / 100);
+    public function uptime() {
+        return round($this->getSNMP()->get(self::OID_SYSTEM_UPTIME) / 100);
     }
 
     /**
@@ -67,9 +62,8 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return string The system contact of the device
      */
-    public function contact()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_CONTACT );
+    public function contact() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_CONTACT);
     }
 
     /**
@@ -77,9 +71,8 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return string The system name of the device
      */
-    public function name()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_NAME );
+    public function name() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_NAME);
     }
 
     /**
@@ -87,9 +80,8 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return string The system location of the device
      */
-    public function location()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_LOCATION );
+    public function location() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_LOCATION);
     }
 
     /**
@@ -122,11 +114,9 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return string The system services of the device
      */
-    public function services()
-    {
-        return $this->getSNMP()->get( self::OID_SYSTEM_SERVICES );
+    public function services() {
+        return $this->getSNMP()->get(self::OID_SYSTEM_SERVICES);
     }
-
 
     /**
      * Gets all system values as an associate array
@@ -136,17 +126,17 @@ class System extends \Cityware\Snmp\MIB
      *
      * @return array All system values as an associate array
      */
-    public function getAll()
-    {
+    public function getAll() {
         $system = array();
 
-        $system[ 'contact' ]     = $this->contact();
-        $system[ 'description' ] = $this->description();
-        $system[ 'location' ]    = $this->location();
-        $system[ 'name' ]        = $this->name();
+        $system['contact'] = $this->contact();
+        $system['description'] = $this->description();
+        $system['location'] = $this->location();
+        $system['name'] = $this->name();
         //$system[ 'services' ]    = $this->services();
-        $system[ 'uptime' ]      = $this->uptime();
+        $system['uptime'] = $this->uptime();
 
         return $system;
     }
+
 }

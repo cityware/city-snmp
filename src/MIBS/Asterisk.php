@@ -7,32 +7,28 @@ namespace Cityware\Snmp\MIBS;
  *
  * @see https://wiki.asterisk.org/wiki/display/AST/Asterisk+MIB+Definitions
  */
-class Asterisk extends \Cityware\Snmp\MIB
-{
+class Asterisk extends \Cityware\Snmp\MIB {
 
     const OID_ASTERISK_VERSION_STRING = '.1.3.6.1.4.1.22736.1.1.1.0';
-    const OID_ASTERISK_VERSION_TAG    = '.1.3.6.1.4.1.22736.1.1.2.0';
-
-    const OID_ASTERISK_UP_TIME         = '.1.3.6.1.4.1.22736.1.2.1.0';
-    const OID_ASTERISK_RELOAD_TIME     = '.1.3.6.1.4.1.22736.1.2.2.0';
-    const OID_ASTERISK_PID             = '.1.3.6.1.4.1.22736.1.2.3.0';
-    const OID_ASTERISK_CONTROL_SOCKET  = '.1.3.6.1.4.1.22736.1.2.4.0';
-    const OID_ASTERISK_CALLS_ACTIVE    = '.1.3.6.1.4.1.22736.1.2.5.0';
+    const OID_ASTERISK_VERSION_TAG = '.1.3.6.1.4.1.22736.1.1.2.0';
+    const OID_ASTERISK_UP_TIME = '.1.3.6.1.4.1.22736.1.2.1.0';
+    const OID_ASTERISK_RELOAD_TIME = '.1.3.6.1.4.1.22736.1.2.2.0';
+    const OID_ASTERISK_PID = '.1.3.6.1.4.1.22736.1.2.3.0';
+    const OID_ASTERISK_CONTROL_SOCKET = '.1.3.6.1.4.1.22736.1.2.4.0';
+    const OID_ASTERISK_CALLS_ACTIVE = '.1.3.6.1.4.1.22736.1.2.5.0';
     const OID_ASTERISK_CALLS_PROCESSED = '.1.3.6.1.4.1.22736.1.2.6.0';
-
-    const OID_ASTERISK_MODULES         = '.1.3.6.1.4.1.22736.1.3.1.0';
+    const OID_ASTERISK_MODULES = '.1.3.6.1.4.1.22736.1.3.1.0';
 
     /**
      * Returns the version of Asterisk
      *
      * > Text version string of the version of Asterisk that
-	 * > the SNMP Agent was compiled to run against.
+     * > the SNMP Agent was compiled to run against.
      *
      * @return string The version of Asterisk
      */
-    public function version()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_VERSION_STRING );
+    public function version() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_VERSION_STRING);
     }
 
     /**
@@ -44,9 +40,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int The SVN revision of Asterisk
      */
-    public function tag()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_VERSION_TAG );
+    public function tag() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_VERSION_TAG);
     }
 
     /**
@@ -56,9 +51,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int Time ticks since Asterisk was started
      */
-    public function uptime()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_UP_TIME );
+    public function uptime() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_UP_TIME);
     }
 
     /**
@@ -68,9 +62,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int Time ticks since the Asterisk config was reload
      */
-    public function reloadTime()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_RELOAD_TIME );
+    public function reloadTime() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_RELOAD_TIME);
     }
 
     /**
@@ -80,9 +73,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int The process ID of the Asterisk instance
      */
-    public function pid()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_PID );
+    public function pid() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_PID);
     }
 
     /**
@@ -92,9 +84,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return string The control socket for giving Asterisk commands
      */
-    public function controlSocket()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_CONTROL_SOCKET );
+    public function controlSocket() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_CONTROL_SOCKET);
     }
 
     /**
@@ -104,9 +95,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int The number of calls currently active on the Asterisk PBX.
      */
-    public function callsActive()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_CALLS_ACTIVE );
+    public function callsActive() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_CALLS_ACTIVE);
     }
 
     /**
@@ -116,9 +106,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int The total number of calls processed through the Asterisk PBX since last restart.
      */
-    public function callsProcessed()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_CALLS_PROCESSED );
+    public function callsProcessed() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_CALLS_PROCESSED);
     }
 
     /**
@@ -128,11 +117,8 @@ class Asterisk extends \Cityware\Snmp\MIB
      *
      * @return int The number of modules currently loaded into Asterisk
      */
-    public function modules()
-    {
-        return $this->getSNMP()->get( self::OID_ASTERISK_MODULES );
+    public function modules() {
+        return $this->getSNMP()->get(self::OID_ASTERISK_MODULES);
     }
-
-
 
 }

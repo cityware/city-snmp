@@ -5,10 +5,10 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class RFC1213 extends \Cityware\Snmp\MIB
-{
-    const OID_RFC1213_PHYSADDRESS                  = '.1.3.6.1.2.1.3.1.1.2';
-    
+class RFC1213 extends \Cityware\Snmp\MIB {
+
+    const OID_RFC1213_PHYSADDRESS = '.1.3.6.1.2.1.3.1.1.2';
+
     /**
      *
      * NOTE- must use "community@vlan" as  community
@@ -26,9 +26,9 @@ class RFC1213 extends \Cityware\Snmp\MIB
      *  if $ifindex only search for this ifindex, if $ifindex and $ip search for both
      */
     public function physAddress($ifindex = null, $ip = null) {
-        
+
         $oid = self::OID_RFC1213_PHYSADDRESS;
-        
+
         if ($ifindex) {
             $oid .= "." . $ifindex;
             if ($ip) {

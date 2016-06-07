@@ -7,8 +7,8 @@ namespace Cityware\Snmp\MIBS;
  */
 class Bridge extends \Cityware\Snmp\MIB {
 
-    const OID_BRIDGE_BASE_PORT_IF_INDEX    = '.1.3.6.1.2.1.17.1.4.1.2';
-    const OID_BRIDGE_MAC_ADDRESS           = '.1.3.6.1.2.1.17.4.3.1.1';
+    const OID_BRIDGE_BASE_PORT_IF_INDEX = '.1.3.6.1.2.1.17.1.4.1.2';
+    const OID_BRIDGE_MAC_ADDRESS = '.1.3.6.1.2.1.17.4.3.1.1';
     const OID_BRIDGE_MAC_ADDRESS_BASE_PORT = '.1.3.6.1.2.1.17.4.3.1.2';
 
     /**
@@ -19,8 +19,7 @@ class Bridge extends \Cityware\Snmp\MIB {
      * @param $baseport int base port to ask for
      * @return array Associate array of STP port IDs (key) to interface IDs (value) or only for $baseport if supplied
      */
-    public function basePortIfIndexes($baseport = null)
-    {
+    public function basePortIfIndexes($baseport = null) {
         $oid = self::OID_BRIDGE_BASE_PORT_IF_INDEX;
         if ($baseport) {
             $oid .= "." . $baseport;

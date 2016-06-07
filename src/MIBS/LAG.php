@@ -5,8 +5,8 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class LAG extends \Cityware\Snmp\MIB
-{
+class LAG extends \Cityware\Snmp\MIB {
+
     /**
      * The identifier value (port ID) of the Aggregator that this Aggregation Port is currently attached
      * to. Zero indicates that the Aggregation Port is not currently attached to an Aggregator.
@@ -24,9 +24,8 @@ class LAG extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of port IDs with a boolean value to indicate if it's an aggregate port (true) or not
      */
-    public function isAggregatePorts()
-    {
-        return $this->getSNMP()->ppTruthValue( $this->getSNMP()->walk1d( self::OID_LAG_AGGREGATE_OR_INDIVIDUAL ) );
+    public function isAggregatePorts() {
+        return $this->getSNMP()->ppTruthValue($this->getSNMP()->walk1d(self::OID_LAG_AGGREGATE_OR_INDIVIDUAL));
     }
 
     /**
@@ -36,9 +35,8 @@ class LAG extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of port IDs with the ID of the aggregate port that they are a member of
      */
-    public function portAttachedIds()
-    {
-        return $this->getSNMP()->walk1d( self::OID_LAG_PORT_ATTACHED_ID );
+    public function portAttachedIds() {
+        return $this->getSNMP()->walk1d(self::OID_LAG_PORT_ATTACHED_ID);
     }
 
     /**
@@ -53,41 +51,36 @@ class LAG extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of LAG ports with the [id] => name of it's constituent ports
      */
-    public function getLAGPorts()
-    {
+    public function getLAGPorts() {
         $ports = array();
 
-        foreach( $this->portAttachedIds() as $portId => $aggPortId )
-            if( $aggPortId != 0 )
-                $ports[ $aggPortId ][$portId] = $this->getSNMP()->useIface()->names()[$portId];
+        foreach ($this->portAttachedIds() as $portId => $aggPortId)
+            if ($aggPortId != 0)
+                $ports[$aggPortId][$portId] = $this->getSNMP()->useIface()->names()[$portId];
 
         return $ports;
     }
-
 
     /**
      * Utility function to identify configured but unattached LAG ports
      *
      * @return array Array of indexed port ids (array index, not value) of configured but unattached LAG ports
      */
-    public function findFailedLAGPorts()
-    {
+    public function findFailedLAGPorts() {
         // find all configured LAG ports
         $lagPorts = $this->isAggregatePorts();
 
         // find all attached ports
         $attachedPorts = $this->portAttachedIds();
 
-        foreach( $lagPorts as $portId => $isLAG )
-        {
-            if( !$isLAG )
-            {
-                unset( $lagPorts[ $portId ] );
+        foreach ($lagPorts as $portId => $isLAG) {
+            if (!$isLAG) {
+                unset($lagPorts[$portId]);
                 continue;
             }
 
-            if( $attachedPorts[ $portId ] != 0 )
-                unset( $lagPorts[ $portId ] );
+            if ($attachedPorts[$portId] != 0)
+                unset($lagPorts[$portId]);
         }
 
         // we should be left with configured but unattached LAG ports
@@ -95,5 +88,3 @@ class LAG extends \Cityware\Snmp\MIB
     }
 
 }
-
-

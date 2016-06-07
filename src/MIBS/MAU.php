@@ -5,36 +5,30 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class MAU extends \Cityware\Snmp\MIB
-{
+class MAU extends \Cityware\Snmp\MIB {
 
-    const OID_IF_INDEX                    = '.1.3.6.1.2.1.26.2.1.1.1';
-    const OID_TYPE                        = '.1.3.6.1.2.1.26.2.1.1.3';
-    const OID_STATUS                      = '.1.3.6.1.2.1.26.2.1.1.4';
-    const OID_MEDIA_AVAILABLE             = '.1.3.6.1.2.1.26.2.1.1.5';
+    const OID_IF_INDEX = '.1.3.6.1.2.1.26.2.1.1.1';
+    const OID_TYPE = '.1.3.6.1.2.1.26.2.1.1.3';
+    const OID_STATUS = '.1.3.6.1.2.1.26.2.1.1.4';
+    const OID_MEDIA_AVAILABLE = '.1.3.6.1.2.1.26.2.1.1.5';
     const OID_MEDIA_AVAILABLE_STATE_EXITS = '.1.3.6.1.2.1.26.2.1.1.6';
-    const OID_JABBER_STATE                = '.1.3.6.1.2.1.26.2.1.1.7';
-    const OID_JABBERING_STATE_ENTERS      = '.1.3.6.1.2.1.26.2.1.1.8';
-    const OID_FALSE_CARRIERS              = '.1.3.6.1.2.1.26.2.1.1.9';
-    const OID_DEFAULT_TYPES               = '.1.3.6.1.2.1.26.2.1.1.11';
-    const OID_AUTONEG_SUPPORTED           = '.1.3.6.1.2.1.26.2.1.1.12';
-
-    const OID_JACK_TYPE                   = '.1.3.6.1.2.1.26.2.2.1.2';
-
-    const OID_AUTONEG_ADMIN_STATUS        = '.1.3.6.1.2.1.26.5.1.1.1';
-    const OID_AUTONEG_REMOTE_SIGNALLING   = '.1.3.6.1.2.1.26.5.1.1.2';
+    const OID_JABBER_STATE = '.1.3.6.1.2.1.26.2.1.1.7';
+    const OID_JABBERING_STATE_ENTERS = '.1.3.6.1.2.1.26.2.1.1.8';
+    const OID_FALSE_CARRIERS = '.1.3.6.1.2.1.26.2.1.1.9';
+    const OID_DEFAULT_TYPES = '.1.3.6.1.2.1.26.2.1.1.11';
+    const OID_AUTONEG_SUPPORTED = '.1.3.6.1.2.1.26.2.1.1.12';
+    const OID_JACK_TYPE = '.1.3.6.1.2.1.26.2.2.1.2';
+    const OID_AUTONEG_ADMIN_STATUS = '.1.3.6.1.2.1.26.5.1.1.1';
+    const OID_AUTONEG_REMOTE_SIGNALLING = '.1.3.6.1.2.1.26.5.1.1.2';
 
     /**
      * Get an array of MAU interface indexes
      *
      * @return array An array of MAU interface indexes
      */
-    public function index()
-    {
-        return $this->getSNMP()->subOidWalk( self::OID_IF_INDEX, 12 );
+    public function index() {
+        return $this->getSNMP()->subOidWalk(self::OID_IF_INDEX, 12);
     }
-
-
 
     /**
      * Constant for MAU type: AUI
@@ -504,7 +498,6 @@ class MAU extends \Cityware\Snmp\MIB
      */
     const TYPE_100GBASEER4 = '.1.3.6.1.2.1.26.4.78';
 
-
     /**
      * Text representation of MAU types
      *
@@ -512,86 +505,85 @@ class MAU extends \Cityware\Snmp\MIB
      * @var array Text representations of interface media types
      */
     public static $TYPES = array(
-        self::TYPE_AUI              => 'AUI',
-        self::TYPE_10BASE5          => '10Base5',
-        self::TYPE_FOIRL            => 'Foirl',
-        self::TYPE_10BASE2          => '10Base2',
-        self::TYPE_10BASET          => '10BaseT',
-        self::TYPE_10BASEFP         => '10BaseFP',
-        self::TYPE_10BASEFB         => '10BaseFB',
-        self::TYPE_10BASEFL         => '10BaseFL',
-        self::TYPE_10BROAD36        => '10Broad36',
-        self::TYPE_10BASETHD        => '10BaseTHD',
-        self::TYPE_10BASETFD        => '10BaseTFD',
-        self::TYPE_10BASEFLHD       => '10BaseFLHD',
-        self::TYPE_10BASEFLFD       => '10BaseFLFD',
-        self::TYPE_100BASET4        => '100BaseT4',
-        self::TYPE_100BASETXHD      => '100BaseTXHD',
-        self::TYPE_100BASETXFD      => '100BaseTXFD',
-        self::TYPE_100BASEFXHD      => '100BaseFXHD',
-        self::TYPE_100BASEFXFD      => '100BaseFXFD',
-        self::TYPE_100BASET2HD      => '100BaseT2HD',
-        self::TYPE_100BASET2FD      => '100BaseT2FD',
-        self::TYPE_1000BASEXHD      => '1000BaseXHD',
-        self::TYPE_1000BASEXFD      => '1000BaseXFD',
-        self::TYPE_1000BASELXHD     => '1000BaseLXHD',
-        self::TYPE_1000BASELXFD     => '1000BaseLXFD',
-        self::TYPE_1000BASESXHD     => '1000BaseSXHD',
-        self::TYPE_1000BASESXFD     => '1000BaseSXFD',
-        self::TYPE_1000BASECXHD     => '1000BaseCXHD',
-        self::TYPE_1000BASECXFD     => '1000BaseCXFD',
-        self::TYPE_1000BASETHD      => '1000BaseTHD',
-        self::TYPE_1000BASETFD      => '1000BaseTFD',
-        self::TYPE_10GIGBASEX       => '10GigBaseX',
-        self::TYPE_10GIGBASELX4     => '10GigBaseLX4',
-        self::TYPE_10GIGBASER       => '10GigBaseR',
-        self::TYPE_10GIGBASEER      => '10GigBaseER',
-        self::TYPE_10GIGBASELR      => '10GigBaseLR',
-        self::TYPE_10GIGBASESR      => '10GigBaseSR',
-        self::TYPE_10GIGBASEW       => '10GigBaseW',
-        self::TYPE_10GIGBASEEW      => '10GigBaseEW',
-        self::TYPE_10GIGBASELW      => '10GigBaseLW',
-        self::TYPE_10GIGBASESW      => '10GigBaseSW',
-        self::TYPE_10GIGBASECX4     => '10GigBaseCX4',
-        self::TYPE_2BASETL          => '2BaseTL',
-        self::TYPE_10PASSTS         => '10PassTS',
-        self::TYPE_100BASEBX10D     => '100BaseBX10D',
-        self::TYPE_100BASEBX10U     => '100BaseBX10U',
-        self::TYPE_100BASELX10      => '100BaseLX10',
-        self::TYPE_1000BASEBX10D    => '1000BaseBX10D',
-        self::TYPE_1000BASEBX10U    => '1000BaseBX10U',
-        self::TYPE_1000BASELX10     => '1000BaseLX10',
-        self::TYPE_1000BASEPX10D    => '1000BasePX10D',
-        self::TYPE_1000BASEPX10U    => '1000BasePX10U',
-        self::TYPE_1000BASEPX20D    => '1000BasePX20D',
-        self::TYPE_1000BASEPX20U    => '1000BasePX20U',
-        self::TYPE_10GBASET         => '10GbaseT',
-        self::TYPE_10GBASELRM       => '10GbaseLRM',
-        self::TYPE_1000BASEKX       => '1000baseKX',
-        self::TYPE_10GBASEKX4       => '10GbaseKX4',
-        self::TYPE_10GBASEKR        => '10GbaseKR',
-        self::TYPE_10G1GBASEPRXD1   => '10G1GbasePRXD1',
-        self::TYPE_10G1GBASEPRXD2   => '10G1GbasePRXD2',
-        self::TYPE_10G1GBASEPRXD3   => '10G1GbasePRXD3',
-        self::TYPE_10G1GBASEPRXU1   => '10G1GbasePRXU1',
-        self::TYPE_10G1GBASEPRXU2   => '10G1GbasePRXU2',
-        self::TYPE_10G1GBASEPRXU3   => '10G1GbasePRXU3',
-        self::TYPE_10GBASEPRD1      => '10GbasePRD1',
-        self::TYPE_10GBASEPRD2      => '10GbasePRD2',
-        self::TYPE_10GBASEPRD3      => '10GbasePRD3',
-        self::TYPE_10GBASEPRU1      => '10GbasePRU1',
-        self::TYPE_10GBASEPRU3      => '10GbasePRU3',
-        self::TYPE_40GBASEKR4       => '40GbaseKR4',
-        self::TYPE_40GBASECR4       => '40GbaseCR4',
-        self::TYPE_40GBASESR4       => '40GbaseSR4',
-        self::TYPE_40GBASEFR        => '40GbaseFR',
-        self::TYPE_40GBASELR4       => '40GbaseLR4',
-        self::TYPE_100GBASECR10     => '100GbaseCR10',
-        self::TYPE_100GBASESR10     => '100GbaseSR10',
-        self::TYPE_100GBASELR4      => '100GbaseLR4',
-        self::TYPE_100GBASEER4      => '100GbaseER4'
+        self::TYPE_AUI => 'AUI',
+        self::TYPE_10BASE5 => '10Base5',
+        self::TYPE_FOIRL => 'Foirl',
+        self::TYPE_10BASE2 => '10Base2',
+        self::TYPE_10BASET => '10BaseT',
+        self::TYPE_10BASEFP => '10BaseFP',
+        self::TYPE_10BASEFB => '10BaseFB',
+        self::TYPE_10BASEFL => '10BaseFL',
+        self::TYPE_10BROAD36 => '10Broad36',
+        self::TYPE_10BASETHD => '10BaseTHD',
+        self::TYPE_10BASETFD => '10BaseTFD',
+        self::TYPE_10BASEFLHD => '10BaseFLHD',
+        self::TYPE_10BASEFLFD => '10BaseFLFD',
+        self::TYPE_100BASET4 => '100BaseT4',
+        self::TYPE_100BASETXHD => '100BaseTXHD',
+        self::TYPE_100BASETXFD => '100BaseTXFD',
+        self::TYPE_100BASEFXHD => '100BaseFXHD',
+        self::TYPE_100BASEFXFD => '100BaseFXFD',
+        self::TYPE_100BASET2HD => '100BaseT2HD',
+        self::TYPE_100BASET2FD => '100BaseT2FD',
+        self::TYPE_1000BASEXHD => '1000BaseXHD',
+        self::TYPE_1000BASEXFD => '1000BaseXFD',
+        self::TYPE_1000BASELXHD => '1000BaseLXHD',
+        self::TYPE_1000BASELXFD => '1000BaseLXFD',
+        self::TYPE_1000BASESXHD => '1000BaseSXHD',
+        self::TYPE_1000BASESXFD => '1000BaseSXFD',
+        self::TYPE_1000BASECXHD => '1000BaseCXHD',
+        self::TYPE_1000BASECXFD => '1000BaseCXFD',
+        self::TYPE_1000BASETHD => '1000BaseTHD',
+        self::TYPE_1000BASETFD => '1000BaseTFD',
+        self::TYPE_10GIGBASEX => '10GigBaseX',
+        self::TYPE_10GIGBASELX4 => '10GigBaseLX4',
+        self::TYPE_10GIGBASER => '10GigBaseR',
+        self::TYPE_10GIGBASEER => '10GigBaseER',
+        self::TYPE_10GIGBASELR => '10GigBaseLR',
+        self::TYPE_10GIGBASESR => '10GigBaseSR',
+        self::TYPE_10GIGBASEW => '10GigBaseW',
+        self::TYPE_10GIGBASEEW => '10GigBaseEW',
+        self::TYPE_10GIGBASELW => '10GigBaseLW',
+        self::TYPE_10GIGBASESW => '10GigBaseSW',
+        self::TYPE_10GIGBASECX4 => '10GigBaseCX4',
+        self::TYPE_2BASETL => '2BaseTL',
+        self::TYPE_10PASSTS => '10PassTS',
+        self::TYPE_100BASEBX10D => '100BaseBX10D',
+        self::TYPE_100BASEBX10U => '100BaseBX10U',
+        self::TYPE_100BASELX10 => '100BaseLX10',
+        self::TYPE_1000BASEBX10D => '1000BaseBX10D',
+        self::TYPE_1000BASEBX10U => '1000BaseBX10U',
+        self::TYPE_1000BASELX10 => '1000BaseLX10',
+        self::TYPE_1000BASEPX10D => '1000BasePX10D',
+        self::TYPE_1000BASEPX10U => '1000BasePX10U',
+        self::TYPE_1000BASEPX20D => '1000BasePX20D',
+        self::TYPE_1000BASEPX20U => '1000BasePX20U',
+        self::TYPE_10GBASET => '10GbaseT',
+        self::TYPE_10GBASELRM => '10GbaseLRM',
+        self::TYPE_1000BASEKX => '1000baseKX',
+        self::TYPE_10GBASEKX4 => '10GbaseKX4',
+        self::TYPE_10GBASEKR => '10GbaseKR',
+        self::TYPE_10G1GBASEPRXD1 => '10G1GbasePRXD1',
+        self::TYPE_10G1GBASEPRXD2 => '10G1GbasePRXD2',
+        self::TYPE_10G1GBASEPRXD3 => '10G1GbasePRXD3',
+        self::TYPE_10G1GBASEPRXU1 => '10G1GbasePRXU1',
+        self::TYPE_10G1GBASEPRXU2 => '10G1GbasePRXU2',
+        self::TYPE_10G1GBASEPRXU3 => '10G1GbasePRXU3',
+        self::TYPE_10GBASEPRD1 => '10GbasePRD1',
+        self::TYPE_10GBASEPRD2 => '10GbasePRD2',
+        self::TYPE_10GBASEPRD3 => '10GbasePRD3',
+        self::TYPE_10GBASEPRU1 => '10GbasePRU1',
+        self::TYPE_10GBASEPRU3 => '10GbasePRU3',
+        self::TYPE_40GBASEKR4 => '40GbaseKR4',
+        self::TYPE_40GBASECR4 => '40GbaseCR4',
+        self::TYPE_40GBASESR4 => '40GbaseSR4',
+        self::TYPE_40GBASEFR => '40GbaseFR',
+        self::TYPE_40GBASELR4 => '40GbaseLR4',
+        self::TYPE_100GBASECR10 => '100GbaseCR10',
+        self::TYPE_100GBASESR10 => '100GbaseSR10',
+        self::TYPE_100GBASELR4 => '100GbaseLR4',
+        self::TYPE_100GBASEER4 => '100GbaseER4'
     );
-
 
     /**
      * Get an array of device interface types
@@ -600,16 +592,14 @@ class MAU extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface admin types
      */
-    public function types( $translate = false )
-    {
-        $types = $this->getSNMP()->subOidWalk( self::OID_TYPE, 12 );
+    public function types($translate = false) {
+        $types = $this->getSNMP()->subOidWalk(self::OID_TYPE, 12);
 
-        if( !$translate )
+        if (!$translate)
             return $types;
 
-        return $this->getSNMP()->translate( $types, self::$TYPES );
+        return $this->getSNMP()->translate($types, self::$TYPES);
     }
-
 
     /**
      * Constant for MAU interface status: other
@@ -647,43 +637,36 @@ class MAU extends \Cityware\Snmp\MIB
      */
     const STATUS_RESET = '6';
 
-
-
     /**
-    * Text representation of MAU states
-    *
-    * @see states()
-    * @var array Text representations of interface states
-    */
+     * Text representation of MAU states
+     *
+     * @see states()
+     * @var array Text representations of interface states
+     */
     public static $STATES = array(
-        self::STATUS_OTHER        => 'other',
-        self::STATUS_UNKNOWN      => 'unknown',
-        self::STATUS_OPERATIONAL  => 'operational',
-        self::STATUS_STANDBY      => 'standby',
-        self::STATUS_SHUTDOWN     => 'shutdown',
-        self::STATUS_RESET        => 'reset'
+        self::STATUS_OTHER => 'other',
+        self::STATUS_UNKNOWN => 'unknown',
+        self::STATUS_OPERATIONAL => 'operational',
+        self::STATUS_STANDBY => 'standby',
+        self::STATUS_SHUTDOWN => 'shutdown',
+        self::STATUS_RESET => 'reset'
     );
 
-
-
     /**
-    * Get an array of device interface states
-    *
-    * @see $STATES
-    * @param boolean $translate If true, return the string representation
-    * @return array An array of interface states
-    */
-    public function states( $translate = false )
-    {
-        $states = $this->getSNMP()->subOidWalk( self::OID_STATUS, 12 );
+     * Get an array of device interface states
+     *
+     * @see $STATES
+     * @param boolean $translate If true, return the string representation
+     * @return array An array of interface states
+     */
+    public function states($translate = false) {
+        $states = $this->getSNMP()->subOidWalk(self::OID_STATUS, 12);
 
-        if( !$translate )
+        if (!$translate)
             return $states;
 
-        return $this->getSNMP()->translate( $states, self::$STATES );
+        return $this->getSNMP()->translate($states, self::$STATES);
     }
-
-
 
     /**
      * Constant for MAU media availability: other
@@ -812,26 +795,26 @@ class MAU extends \Cityware\Snmp\MIB
      * @var array Text representations of interface media availability
      */
     public static $AVAILABILITY = array(
-        self::AVAILABILITY_OTHER                => 'other',
-        self::AVAILABILITY_UNKNOWN              => 'unknown',
-        self::AVAILABILITY_AVAILABLE            => 'available',
-        self::AVAILABILITY_NOTAVAILABLE         => 'notAvailable',
-        self::AVAILABILITY_REMOTEFAULT          => 'remoteFault',
-        self::AVAILABILITY_INVALIDSIGNAL        => 'invalidSignal',
-        self::AVAILABILITY_REMOTEJABBER         => 'remoteJabber',
-        self::AVAILABILITY_REMOTELINKLOSS       => 'remoteLinkLoss',
-        self::AVAILABILITY_REMOTETEST           => 'remoteTest',
-        self::AVAILABILITY_OFFLINE              => 'offline',
-        self::AVAILABILITY_AUTONEGERROR         => 'autoNegError',
-        self::AVAILABILITY_PMDLINKFAULT         => 'pmdLinkFault',
-        self::AVAILABILITY_WISFRAMELOSS         => 'wisFrameLoss',
-        self::AVAILABILITY_WISSIGNALLOSS        => 'wisSignalLoss',
-        self::AVAILABILITY_PCSLINKFAULT         => 'pcsLinkFault',
-        self::AVAILABILITY_EXCESSIVEBER         => 'excessiveBER',
-        self::AVAILABILITY_DXSLINKFAULT         => 'dxsLinkFault',
-        self::AVAILABILITY_PXSLINKFAULT         => 'pxsLinkFault',
-        self::AVAILABILITY_AVAILABLEREDUCED     => 'availableReduced',
-        self::AVAILABILITY_READY                => 'ready'
+        self::AVAILABILITY_OTHER => 'other',
+        self::AVAILABILITY_UNKNOWN => 'unknown',
+        self::AVAILABILITY_AVAILABLE => 'available',
+        self::AVAILABILITY_NOTAVAILABLE => 'notAvailable',
+        self::AVAILABILITY_REMOTEFAULT => 'remoteFault',
+        self::AVAILABILITY_INVALIDSIGNAL => 'invalidSignal',
+        self::AVAILABILITY_REMOTEJABBER => 'remoteJabber',
+        self::AVAILABILITY_REMOTELINKLOSS => 'remoteLinkLoss',
+        self::AVAILABILITY_REMOTETEST => 'remoteTest',
+        self::AVAILABILITY_OFFLINE => 'offline',
+        self::AVAILABILITY_AUTONEGERROR => 'autoNegError',
+        self::AVAILABILITY_PMDLINKFAULT => 'pmdLinkFault',
+        self::AVAILABILITY_WISFRAMELOSS => 'wisFrameLoss',
+        self::AVAILABILITY_WISSIGNALLOSS => 'wisSignalLoss',
+        self::AVAILABILITY_PCSLINKFAULT => 'pcsLinkFault',
+        self::AVAILABILITY_EXCESSIVEBER => 'excessiveBER',
+        self::AVAILABILITY_DXSLINKFAULT => 'dxsLinkFault',
+        self::AVAILABILITY_PXSLINKFAULT => 'pxsLinkFault',
+        self::AVAILABILITY_AVAILABLEREDUCED => 'availableReduced',
+        self::AVAILABILITY_READY => 'ready'
     );
 
     /**
@@ -841,17 +824,14 @@ class MAU extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface admin types
      */
-    public function mediaAvailable( $translate = false )
-    {
-        $avail = $this->getSNMP()->subOidWalk( self::OID_MEDIA_AVAILABLE, 12 );
+    public function mediaAvailable($translate = false) {
+        $avail = $this->getSNMP()->subOidWalk(self::OID_MEDIA_AVAILABLE, 12);
 
-        if( !$translate )
+        if (!$translate)
             return $avail;
 
-        return $this->getSNMP()->translate( $avail, self::$AVAILABILITY );
+        return $this->getSNMP()->translate($avail, self::$AVAILABILITY);
     }
-
-
 
     /**
      * Get an array of device interface types
@@ -860,12 +840,9 @@ class MAU extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface admin types
      */
-    public function mediaAvailableStateExits()
-    {
-        return $this->getSNMP()->subOidWalk( self::OID_MEDIA_AVAILABLE_STATE_EXITS, 12 );
+    public function mediaAvailableStateExits() {
+        return $this->getSNMP()->subOidWalk(self::OID_MEDIA_AVAILABLE_STATE_EXITS, 12);
     }
-
-
 
     /**
      * Constant for MAU media jabber state: other
@@ -891,7 +868,6 @@ class MAU extends \Cityware\Snmp\MIB
      */
     const JABBER_STATE_JABBERING = '4';
 
-
     /**
      * Text representation of jabber states
      *
@@ -899,12 +875,11 @@ class MAU extends \Cityware\Snmp\MIB
      * @var array Text representations of interface jabber states
      */
     public static $JABBER_STATES = array(
-        self::JABBER_STATE_OTHER     => 'other',
-        self::JABBER_STATE_UNKNOWN   => 'unknown',
-        self::JABBER_STATE_NOJABBER  => 'nojabber',
+        self::JABBER_STATE_OTHER => 'other',
+        self::JABBER_STATE_UNKNOWN => 'unknown',
+        self::JABBER_STATE_NOJABBER => 'nojabber',
         self::JABBER_STATE_JABBERING => 'jabbering'
     );
-
 
     /**
      * Get an array of device interface jabber states
@@ -913,36 +888,31 @@ class MAU extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface jabber states
      */
-    public function jabberStates( $translate = false )
-    {
-        $states = $this->getSNMP()->subOidWalk( self::OID_JABBER_STATE, 12 );
+    public function jabberStates($translate = false) {
+        $states = $this->getSNMP()->subOidWalk(self::OID_JABBER_STATE, 12);
 
-        if( !$translate )
+        if (!$translate)
             return $states;
 
-        return $this->getSNMP()->translate( $states, self::$JABBER_STATES );
+        return $this->getSNMP()->translate($states, self::$JABBER_STATES);
     }
-
 
     /**
      * Get an array of the number of times a media interface entered the jabbering state
      *
      * @return array An array of the number of times a media interface entered the jabbering state
      */
-    public function jabberingStateEnters()
-    {
-        return $this->getSNMP()->subOidWalk( self::OID_JABBERING_STATE_ENTERS, 12 );
+    public function jabberingStateEnters() {
+        return $this->getSNMP()->subOidWalk(self::OID_JABBERING_STATE_ENTERS, 12);
     }
-
 
     /**
      * A count of the number of false carrier events during IDLE in 100BASE-X and 1000BASE-X links.
      *
      * @return array A count of the number of false carrier events during IDLE in 100BASE-X and 1000BASE-X links.
      */
-    public function falseCarriers()
-    {
-        return $this->getSNMP()->subOidWalk( self::OID_FALSE_CARRIERS, 12 );
+    public function falseCarriers() {
+        return $this->getSNMP()->subOidWalk(self::OID_FALSE_CARRIERS, 12);
     }
 
     /**
@@ -951,9 +921,8 @@ class MAU extends \Cityware\Snmp\MIB
      *
      * @return array The default administrative baseband MAU type
      */
-    public function defaultTypes()
-    {
-        return $this->getSNMP()->subOidWalk( self::OID_DEFAULT_TYPES, 12 );
+    public function defaultTypes() {
+        return $this->getSNMP()->subOidWalk(self::OID_DEFAULT_TYPES, 12);
     }
 
     /**
@@ -961,12 +930,9 @@ class MAU extends \Cityware\Snmp\MIB
      *
      * @return array Is auto-negotiation is supported on this MAU
      */
-    public function autonegSupported()
-    {
-        return $this->getSNMP()->ppTruthValue( $this->getSNMP()->subOidWalk( self::OID_AUTONEG_SUPPORTED, 12 ) );
+    public function autonegSupported() {
+        return $this->getSNMP()->ppTruthValue($this->getSNMP()->subOidWalk(self::OID_AUTONEG_SUPPORTED, 12));
     }
-
-
 
     /**
      * Constant for MAU media availability: other
@@ -1064,7 +1030,6 @@ class MAU extends \Cityware\Snmp\MIB
      */
     const JACK_TYPE_SFPPLUSDA = '16';
 
-
     /**
      * Text representation of MAU jack types
      *
@@ -1072,52 +1037,47 @@ class MAU extends \Cityware\Snmp\MIB
      * @var array Text representations of interface jack type
      */
     public static $JACK_TYPES = array(
-        self::JACK_TYPE_OTHER                => 'other',
-        self::JACK_TYPE_RJ45                 => 'rj45',
-        self::JACK_TYPE_RJ45S                => 'rj45S',
-        self::JACK_TYPE_DB9                  => 'db9',
-        self::JACK_TYPE_BNC                  => 'bnc',
-        self::JACK_TYPE_FAUI                 => 'fAUI',
-        self::JACK_TYPE_MAUI                 => 'mAUI',
-        self::JACK_TYPE_FIBERSC              => 'fiberSC',
-        self::JACK_TYPE_FIBERMIC             => 'fiberMIC',
-        self::JACK_TYPE_FIBERST              => 'fiberST',
-        self::JACK_TYPE_TELCO                => 'telco',
-        self::JACK_TYPE_MTRJ                 => 'mtrj',
-        self::JACK_TYPE_HSSDC                => 'hssdc',
-        self::JACK_TYPE_FIBERLC              => 'fiberLC',
-        self::JACK_TYPE_CX4                  => 'cx4',
-        self::JACK_TYPE_SFPPLUSDA            => 'sfpPlusDA',
+        self::JACK_TYPE_OTHER => 'other',
+        self::JACK_TYPE_RJ45 => 'rj45',
+        self::JACK_TYPE_RJ45S => 'rj45S',
+        self::JACK_TYPE_DB9 => 'db9',
+        self::JACK_TYPE_BNC => 'bnc',
+        self::JACK_TYPE_FAUI => 'fAUI',
+        self::JACK_TYPE_MAUI => 'mAUI',
+        self::JACK_TYPE_FIBERSC => 'fiberSC',
+        self::JACK_TYPE_FIBERMIC => 'fiberMIC',
+        self::JACK_TYPE_FIBERST => 'fiberST',
+        self::JACK_TYPE_TELCO => 'telco',
+        self::JACK_TYPE_MTRJ => 'mtrj',
+        self::JACK_TYPE_HSSDC => 'hssdc',
+        self::JACK_TYPE_FIBERLC => 'fiberLC',
+        self::JACK_TYPE_CX4 => 'cx4',
+        self::JACK_TYPE_SFPPLUSDA => 'sfpPlusDA',
     );
 
-
     /**
-    * Get an array of device jack types
-    *
-    * @see $JACK_TYPES
-    * @param boolean $translate If true, return the string representation
-    * @return array An array of interface jack types
-    */
-    public function jackTypes( $translate = false )
-    {
-        $types = $this->getSNMP()->subOidWalk( self::OID_JACK_TYPE, 12 );
+     * Get an array of device jack types
+     *
+     * @see $JACK_TYPES
+     * @param boolean $translate If true, return the string representation
+     * @return array An array of interface jack types
+     */
+    public function jackTypes($translate = false) {
+        $types = $this->getSNMP()->subOidWalk(self::OID_JACK_TYPE, 12);
 
-        if( !$translate )
+        if (!$translate)
             return $types;
 
-        return $this->getSNMP()->translate( $types, self::$JACK_TYPES );
+        return $this->getSNMP()->translate($types, self::$JACK_TYPES);
     }
-
 
     /**
      * Whether autoneg is enabled or not on an interface
      *
      * @return array Whether autoneg is enabled or not on an interface
      */
-    public function autonegAdminState()
-    {
-        return $this->getSNMP()->ppTruthValue( $this->getSNMP()->subOidWalk( self::OID_AUTONEG_ADMIN_STATUS, 12 ) );
+    public function autonegAdminState() {
+        return $this->getSNMP()->ppTruthValue($this->getSNMP()->subOidWalk(self::OID_AUTONEG_ADMIN_STATUS, 12));
     }
-
 
 }
