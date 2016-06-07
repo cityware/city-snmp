@@ -22,7 +22,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalSwapSize() {
-        return $this->getSNMP()->get(self::OID_TOTAL_SWAP_SIZE);
+        return ($this->getSNMP()->get(self::OID_TOTAL_SWAP_SIZE)*1024);
     }
     
     /**
@@ -38,7 +38,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalRamInMachine() {
-        return $this->getSNMP()->get(self::OID_TOTAL_RAM_IN_MACHINE)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_RAM_IN_MACHINE)*1024);
     }
     
     /**
@@ -46,7 +46,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalRamUsed() {
-        return $this->getSNMP()->get(self::OID_TOTAL_RAM_USED)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_RAM_USED)*1024);
     }
     
     /**
@@ -54,7 +54,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalRamFree() {
-        return $this->getSNMP()->get(self::OID_TOTAL_RAM_FREE)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_RAM_FREE)*1024);
     }
     
     /**
@@ -62,7 +62,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalRamShared() {
-        return $this->getSNMP()->get(self::OID_TOTAL_RAM_SHARED)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_RAM_SHARED)*1024);
     }
     
     /**
@@ -70,7 +70,7 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalRamBuffered() {
-        return $this->getSNMP()->get(self::OID_TOTAL_RAM_BUFFERED)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_RAM_BUFFERED)*1024);
     }
     
     /**
@@ -78,6 +78,6 @@ class Memory extends \Cityware\Snmp\MIB
      * @return int
      */
     public function totalCachedMemory() {
-        return $this->getSNMP()->get(self::OID_TOTAL_CACHED_MEMORY)*1024;
+        return ($this->getSNMP()->get(self::OID_TOTAL_CACHED_MEMORY)*1024);
     }
 }
