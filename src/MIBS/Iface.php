@@ -5,53 +5,49 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class Iface extends \Cityware\Snmp\MIB
-{
-    const OID_IF_NUMBER                  = '.1.3.6.1.2.1.2.1.0';
+class Iface extends \Cityware\Snmp\MIB {
 
-    const OID_IF_INDEX                   = '.1.3.6.1.2.1.2.2.1.1';
-    const OID_IF_DESCRIPTION             = '.1.3.6.1.2.1.2.2.1.2';
-    const OID_IF_TYPE                    = '.1.3.6.1.2.1.2.2.1.3';
-    const OID_IF_MTU                     = '.1.3.6.1.2.1.2.2.1.4';
-    const OID_IF_SPEED                   = '.1.3.6.1.2.1.2.2.1.5';
-    const OID_IF_PHYS_ADDRESS            = '.1.3.6.1.2.1.2.2.1.6';
-    const OID_IF_ADMIN_STATUS            = '.1.3.6.1.2.1.2.2.1.7';
-    const OID_IF_OPER_STATUS             = '.1.3.6.1.2.1.2.2.1.8';
-    const OID_IF_LAST_CHANGE             = '.1.3.6.1.2.1.2.2.1.9';
-
-    const OID_IF_IN_OCTETS               = '.1.3.6.1.2.1.2.2.1.10';
-    const OID_IF_IN_UNICAST_PACKETS      = '.1.3.6.1.2.1.2.2.1.11';
-    const OID_IF_IN_NON_UNICAST_PACKETS  = '.1.3.6.1.2.1.2.2.1.12';
-    const OID_IF_IN_DISCARDS             = '.1.3.6.1.2.1.2.2.1.13';
-    const OID_IF_IN_ERRORS               = '.1.3.6.1.2.1.2.2.1.14';
-    const OID_IF_IN_UNKNOWN_PROTOCOLS    = '.1.3.6.1.2.1.2.2.1.15';
-
-    const OID_IF_OUT_OCTETS              = '.1.3.6.1.2.1.2.2.1.16';
-    const OID_IF_OUT_UNICAST_PACKETS     = '.1.3.6.1.2.1.2.2.1.17';
+    const OID_IF_NUMBER = '.1.3.6.1.2.1.2.1.0';
+    const OID_IF_INDEX = '.1.3.6.1.2.1.2.2.1.1';
+    const OID_IF_DESCRIPTION = '.1.3.6.1.2.1.2.2.1.2';
+    const OID_IF_TYPE = '.1.3.6.1.2.1.2.2.1.3';
+    const OID_IF_MTU = '.1.3.6.1.2.1.2.2.1.4';
+    const OID_IF_SPEED = '.1.3.6.1.2.1.2.2.1.5';
+    const OID_IF_PHYS_ADDRESS = '.1.3.6.1.2.1.2.2.1.6';
+    const OID_IF_ADMIN_STATUS = '.1.3.6.1.2.1.2.2.1.7';
+    const OID_IF_OPER_STATUS = '.1.3.6.1.2.1.2.2.1.8';
+    const OID_IF_LAST_CHANGE = '.1.3.6.1.2.1.2.2.1.9';
+    const OID_IF_IN_OCTETS = '.1.3.6.1.2.1.2.2.1.10';
+    const OID_IF_IN_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.11';
+    const OID_IF_IN_NON_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.12';
+    const OID_IF_IN_DISCARDS = '.1.3.6.1.2.1.2.2.1.13';
+    const OID_IF_IN_ERRORS = '.1.3.6.1.2.1.2.2.1.14';
+    const OID_IF_IN_UNKNOWN_PROTOCOLS = '.1.3.6.1.2.1.2.2.1.15';
+    const OID_IF_OUT_OCTETS = '.1.3.6.1.2.1.2.2.1.16';
+    const OID_IF_OUT_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.17';
     const OID_IF_OUT_NON_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.18';
-    const OID_IF_OUT_DISCARDS            = '.1.3.6.1.2.1.2.2.1.19';
-    const OID_IF_OUT_ERRORS              = '.1.3.6.1.2.1.2.2.1.20';
-    const OID_IF_OUT_QUEUE_LENGTH        = '.1.3.6.1.2.1.2.2.1.21';
-
-    const OID_IF_NAME                    = '.1.3.6.1.2.1.31.1.1.1.1';
-    const OID_IF_IN_MULTICAST            = '.1.3.6.1.2.1.31.1.1.1.2';  // no fn() implemented
-    const OID_IF_IN_BROADCAST            = '.1.3.6.1.2.1.31.1.1.1.3';  // no fn() implemented
-    const OID_IF_OUT_MULTICAST           = '.1.3.6.1.2.1.31.1.1.1.4';  // no fn() implemented
-    const OID_IF_OUT_BROADCAST           = '.1.3.6.1.2.1.31.1.1.1.5';  // no fn() implemented
-    const OID_IF_HC_IN_OCTETS            = '.1.3.6.1.2.1.31.1.1.1.6';  // no fn() implemented
-    const OID_IF_HC_IN_UNICAST_PACKETS   = '.1.3.6.1.2.1.31.1.1.1.7';  // no fn() implemented
-    const OID_IF_HC_IN_MULTICAST         = '.1.3.6.1.2.1.31.1.1.1.8';  // no fn() implemented
-    const OID_IF_HC_IN_BROADCAST         = '.1.3.6.1.2.1.31.1.1.1.9';  // no fn() implemented
-    const OID_IF_HC_OUT_OCTETS           = '.1.3.6.1.2.1.31.1.1.1.10'; // no fn() implemented
-    const OID_IF_HC_OUT_UNICAST_PACKETS  = '.1.3.6.1.2.1.31.1.1.1.11'; // no fn() implemented
-    const OID_IF_HC_OUT_MULTICAST        = '.1.3.6.1.2.1.31.1.1.1.12'; // no fn() implemented
-    const OID_IF_HC_OUT_BROADCAST        = '.1.3.6.1.2.1.31.1.1.1.13'; // no fn() implemented
-    const OID_IF_LINK_UP_DOWN_TRAP       = '.1.3.6.1.2.1.31.1.1.1.14'; // no fn() implemented
-    const OID_IF_HIGH_SPEED              = '.1.3.6.1.2.1.31.1.1.1.15';
-    const OID_IF_PROMISCUOUS_MODE        = '.1.3.6.1.2.1.31.1.1.1.16'; // no fn() implemented
-    const OID_IF_CONNECTOR_PRESENT       = '.1.3.6.1.2.1.31.1.1.1.17'; // no fn() implemented
-    const OID_IF_ALIAS                   = '.1.3.6.1.2.1.31.1.1.1.18';
-    const OID_IF_COUNTER_DISCONTINUTIY   = '.1.3.6.1.2.1.31.1.1.1.19'; // no fn() implemented
+    const OID_IF_OUT_DISCARDS = '.1.3.6.1.2.1.2.2.1.19';
+    const OID_IF_OUT_ERRORS = '.1.3.6.1.2.1.2.2.1.20';
+    const OID_IF_OUT_QUEUE_LENGTH = '.1.3.6.1.2.1.2.2.1.21';
+    const OID_IF_NAME = '.1.3.6.1.2.1.31.1.1.1.1';
+    const OID_IF_IN_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.2';  // no fn() implemented
+    const OID_IF_IN_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.3';  // no fn() implemented
+    const OID_IF_OUT_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.4';  // no fn() implemented
+    const OID_IF_OUT_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.5';  // no fn() implemented
+    const OID_IF_HC_IN_OCTETS = '.1.3.6.1.2.1.31.1.1.1.6';  // no fn() implemented
+    const OID_IF_HC_IN_UNICAST_PACKETS = '.1.3.6.1.2.1.31.1.1.1.7';  // no fn() implemented
+    const OID_IF_HC_IN_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.8';  // no fn() implemented
+    const OID_IF_HC_IN_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.9';  // no fn() implemented
+    const OID_IF_HC_OUT_OCTETS = '.1.3.6.1.2.1.31.1.1.1.10'; // no fn() implemented
+    const OID_IF_HC_OUT_UNICAST_PACKETS = '.1.3.6.1.2.1.31.1.1.1.11'; // no fn() implemented
+    const OID_IF_HC_OUT_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.12'; // no fn() implemented
+    const OID_IF_HC_OUT_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.13'; // no fn() implemented
+    const OID_IF_LINK_UP_DOWN_TRAP = '.1.3.6.1.2.1.31.1.1.1.14'; // no fn() implemented
+    const OID_IF_HIGH_SPEED = '.1.3.6.1.2.1.31.1.1.1.15';
+    const OID_IF_PROMISCUOUS_MODE = '.1.3.6.1.2.1.31.1.1.1.16'; // no fn() implemented
+    const OID_IF_CONNECTOR_PRESENT = '.1.3.6.1.2.1.31.1.1.1.17'; // no fn() implemented
+    const OID_IF_ALIAS = '.1.3.6.1.2.1.31.1.1.1.18';
+    const OID_IF_COUNTER_DISCONTINUTIY = '.1.3.6.1.2.1.31.1.1.1.19'; // no fn() implemented
 
     /**
      * Get the number of network interfaces (regardless of
@@ -59,20 +55,18 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return int The number of network interfaces on the system
      */
-    public function numberOfInterfaces()
-    {
-        return $this->getSNMP()->get( self::OID_IF_NUMBER );
-    }
 
+    public function numberOfInterfaces() {
+        return $this->getSNMP()->get(self::OID_IF_NUMBER);
+    }
 
     /**
      * Get an array of device MTUs
      *
      * @return array An array of device MTUs
      */
-    public function mtus()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_MTU );
+    public function mtus() {
+        return $this->getSNMP()->walk1d(self::OID_IF_MTU);
     }
 
     /**
@@ -86,19 +80,18 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of device physical addresses
      */
-    public function physAddresses()
-    {
-        $pa = $this->getSNMP()->walk1d( self::OID_IF_PHYS_ADDRESS );
+    public function physAddresses() {
+        $pa = $this->getSNMP()->walk1d(self::OID_IF_PHYS_ADDRESS);
 
         // some switches return leading '00:' as '0:' - we correct this here:
-        foreach( $pa as $i => $a )
-            if( strpos( $a, ':' ) == 1 )
-                $pa[ $i ] = '0' . $a;
+        foreach ($pa as $i => $a) {
+            if (strpos($a, ':') == 1) {
+                $pa[$i] = '0' . $a;
+            }
+        }
 
         return $pa;
     }
-
-
 
     /**
      * Constant for possible value of interface admin status.
@@ -125,8 +118,8 @@ class Iface extends \Cityware\Snmp\MIB
      * @var array Text representations of interface admin status.
      */
     public static $IF_ADMIN_STATES = array(
-        self::IF_ADMIN_STATUS_UP      => 'up',
-        self::IF_ADMIN_STATUS_DOWN    => 'down',
+        self::IF_ADMIN_STATUS_UP => 'up',
+        self::IF_ADMIN_STATUS_DOWN => 'down',
         self::IF_ADMIN_STATUS_TESTING => 'testing'
     );
 
@@ -146,14 +139,14 @@ class Iface extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface admin states
      */
-    public function adminStates( $translate = false )
-    {
-        $states = $this->getSNMP()->walk1d( self::OID_IF_ADMIN_STATUS );
+    public function adminStates($translate = false) {
+        $states = $this->getSNMP()->walk1d(self::OID_IF_ADMIN_STATUS);
 
-        if( !$translate )
+        if (!$translate) {
             return $states;
+        }
 
-        return $this->getSNMP()->translate( $states, self::$IF_ADMIN_STATES );
+        return $this->getSNMP()->translate($states, self::$IF_ADMIN_STATES);
     }
 
     /**
@@ -172,17 +165,17 @@ class Iface extends \Cityware\Snmp\MIB
      * @param bool $asUnixTimestamp Poll sysUpTime and use this to return a timestamp of the last change
      * @return array Timeticks (or zero) since last change of the interfaces
      */
-    public function lastChanges( $asUnixTimestamp = false )
-    {
-        $lc = $this->getSNMP()->walk1d( self::OID_IF_LAST_CHANGE );
+    public function lastChanges($asUnixTimestamp = false) {
+        $lc = $this->getSNMP()->walk1d(self::OID_IF_LAST_CHANGE);
 
-        if( $asUnixTimestamp )
-        {
+        if ($asUnixTimestamp) {
             $sysUptime = $this->getSNMP()->useSystem()->uptime() / 100;
 
-            foreach( $lc as $i => $t )
-                if( $t )
-                    $lc[$i] = intval( floor( time() - $sysUptime + ( $t / 100 ) ) );
+            foreach ($lc as $i => $t) {
+                if ($t) {
+                    $lc[$i] = intval(floor(time() - $sysUptime + ( $t / 100 )));
+                }
+            }
         }
 
         return $lc;
@@ -196,9 +189,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of octets received on interfaces
      */
-    public function inOctets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_OCTETS );
+    public function inOctets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_OCTETS);
     }
 
     /**
@@ -209,9 +201,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of unicast packets received on interfaces
      */
-    public function inUnicastPackets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_UNICAST_PACKETS );
+    public function inUnicastPackets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_UNICAST_PACKETS);
     }
 
     /**
@@ -223,9 +214,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of non-unicast packets received on interfaces
      */
-    public function inNonUnicastPackets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_NON_UNICAST_PACKETS );
+    public function inNonUnicastPackets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_NON_UNICAST_PACKETS);
     }
 
     /**
@@ -240,9 +230,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return arrary The total number of discarded inbound packets received on interfaces
      */
-    public function inDiscards()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_DISCARDS );
+    public function inDiscards() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_DISCARDS);
     }
 
     /**
@@ -254,16 +243,9 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of error inbound packets received on interfaces
      */
-    public function inErrors()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_ERRORS );
+    public function inErrors() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_ERRORS);
     }
-
-
-
-
-
-
 
     /**
      * Get an array of device interface out octets
@@ -273,9 +255,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of octets transmitted on interfaces
      */
-    public function outOctets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_OCTETS );
+    public function outOctets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_OCTETS);
     }
 
     /**
@@ -288,9 +269,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of unicast packets transmitted on interfaces
      */
-    public function outUnicastPackets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_UNICAST_PACKETS );
+    public function outUnicastPackets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_UNICAST_PACKETS);
     }
 
     /**
@@ -304,9 +284,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of non-unicast packets requested sent interfaces
      */
-    public function outNonUnicastPackets()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_NON_UNICAST_PACKETS );
+    public function outNonUnicastPackets() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_NON_UNICAST_PACKETS);
     }
 
     /**
@@ -320,9 +299,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return arrary The total number of discarded outbound packets
      */
-    public function outDiscards()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_DISCARDS );
+    public function outDiscards() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_DISCARDS);
     }
 
     /**
@@ -333,9 +311,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of error outbound packets received on interfaces
      */
-    public function outErrors()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_ERRORS );
+    public function outErrors() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_ERRORS);
     }
 
     /**
@@ -345,14 +322,9 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The total number of packets in the outbound queues
      */
-    public function outQueueLength()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_OUT_QUEUE_LENGTH );
+    public function outQueueLength() {
+        return $this->getSNMP()->walk1d(self::OID_IF_OUT_QUEUE_LENGTH);
     }
-
-
-
-
 
     /**
      * Get an array of packets received on an interface of unknown protocol
@@ -363,9 +335,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array The number of packets received on an interface of unknown protocol
      */
-    public function inUnknownProtocols()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_IN_UNKNOWN_PROTOCOLS );
+    public function inUnknownProtocols() {
+        return $this->getSNMP()->walk1d(self::OID_IF_IN_UNKNOWN_PROTOCOLS);
     }
 
     /**
@@ -382,9 +353,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of interface indexes
      */
-    public function indexes()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_INDEX );
+    public function indexes() {
+        return $this->getSNMP()->walk1d(self::OID_IF_INDEX);
     }
 
     /**
@@ -401,9 +371,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of interface names
      */
-    public function names()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_NAME );
+    public function names() {
+        return $this->getSNMP()->walk1d(self::OID_IF_NAME);
     }
 
     /**
@@ -420,9 +389,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of interface aliases
      */
-    public function aliases()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_ALIAS );
+    public function aliases() {
+        return $this->getSNMP()->walk1d(self::OID_IF_ALIAS);
     }
 
     /**
@@ -439,9 +407,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of interface descriptions
      */
-    public function descriptions()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_DESCRIPTION );
+    public function descriptions() {
+        return $this->getSNMP()->walk1d(self::OID_IF_DESCRIPTION);
     }
 
     /**
@@ -468,9 +435,8 @@ class Iface extends \Cityware\Snmp\MIB
      * @see highSpeeds()
      * @return array An array of interface operating speeds
      */
-    public function speeds()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_SPEED );
+    public function speeds() {
+        return $this->getSNMP()->walk1d(self::OID_IF_SPEED);
     }
 
     /**
@@ -500,43 +466,45 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array An array of interface operating speeds
      */
-    public function highSpeeds()
-    {
-        return $this->getSNMP()->walk1d( self::OID_IF_HIGH_SPEED );
+    public function highSpeeds() {
+        return $this->getSNMP()->walk1d(self::OID_IF_HIGH_SPEED);
     }
 
+    /**
+     * Constant for possible value of interface operation status.
+     * @see operationStates()
+     */
+    const IF_OPER_STATUS_UP = 1;
 
+    /**
+     * Constant for possible value of interface operation status.
+     * @see operationStates()
+     */
+    const IF_OPER_STATUS_DOWN = 2;
 
     /**
      * Constant for possible value of interface operation status.
      * @see operationStates()
      */
-    const IF_OPER_STATUS_UP               = 1;
+    const IF_OPER_STATUS_TESTING = 3;
+
     /**
      * Constant for possible value of interface operation status.
      * @see operationStates()
      */
-    const IF_OPER_STATUS_DOWN             = 2;
+    const IF_OPER_STATUS_UNKNOWN = 4;
+
     /**
      * Constant for possible value of interface operation status.
      * @see operationStates()
      */
-    const IF_OPER_STATUS_TESTING          = 3;
+    const IF_OPER_STATUS_DORMANT = 5;
+
     /**
      * Constant for possible value of interface operation status.
      * @see operationStates()
      */
-    const IF_OPER_STATUS_UNKNOWN          = 4;
-    /**
-     * Constant for possible value of interface operation status.
-     * @see operationStates()
-     */
-    const IF_OPER_STATUS_DORMANT          = 5;
-    /**
-     * Constant for possible value of interface operation status.
-     * @see operationStates()
-     */
-    const IF_OPER_STATUS_NOT_PRESENT      = 6;
+    const IF_OPER_STATUS_NOT_PRESENT = 6;
 
     /**
      * Constant for possible value of interface operation status.
@@ -551,13 +519,13 @@ class Iface extends \Cityware\Snmp\MIB
      * @var array Text representations of interface operating status.
      */
     public static $IF_OPER_STATES = array(
-        self::IF_OPER_STATUS_UP                => 'up',
-        self::IF_OPER_STATUS_DOWN              => 'down',
-        self::IF_OPER_STATUS_TESTING           => 'testing',
-        self::IF_OPER_STATUS_UNKNOWN           => 'unknown',
-        self::IF_OPER_STATUS_DORMANT           => 'dormant',
-        self::IF_OPER_STATUS_NOT_PRESENT       => 'notPresent',
-        self::IF_OPER_STATUS_LOWER_LAYER_DOWN  => 'lowerLayerDown'
+        self::IF_OPER_STATUS_UP => 'up',
+        self::IF_OPER_STATUS_DOWN => 'down',
+        self::IF_OPER_STATUS_TESTING => 'testing',
+        self::IF_OPER_STATUS_UNKNOWN => 'unknown',
+        self::IF_OPER_STATUS_DORMANT => 'dormant',
+        self::IF_OPER_STATUS_NOT_PRESENT => 'notPresent',
+        self::IF_OPER_STATUS_LOWER_LAYER_DOWN => 'lowerLayerDown'
     );
 
     /**
@@ -576,16 +544,15 @@ class Iface extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface states
      */
-    public function operationStates( $translate = false )
-    {
-        $states = $this->getSNMP()->walk1d( self::OID_IF_OPER_STATUS );
+    public function operationStates($translate = false) {
+        $states = $this->getSNMP()->walk1d(self::OID_IF_OPER_STATUS);
 
-        if( !$translate )
+        if (!$translate) {
             return $states;
+        }
 
-        return $this->getSNMP()->translate( $states, self::$IF_OPER_STATES );
+        return $this->getSNMP()->translate($states, self::$IF_OPER_STATES);
     }
-
 
     /**
      * Constant for possible type of an interface
@@ -1998,240 +1965,240 @@ class Iface extends \Cityware\Snmp\MIB
      * @var array Text representations of interface types.
      */
     public static $IF_TYPES = array(
-        self::IF_TYPE_OTHER                      => 'other',
-        self::IF_TYPE_REGULAR1822                      => 'regular1822',
-        self::IF_TYPE_HDH1822                      => 'hdh1822',
-        self::IF_TYPE_DDNX25                      => 'ddnX25',
-        self::IF_TYPE_RFC877X25                      => 'rfc877x25',
-        self::IF_TYPE_ETHERNETCSMACD                      => 'ethernetCsmacd',
-        self::IF_TYPE_ISO88023CSMACD                      => 'iso88023Csmacd',
-        self::IF_TYPE_ISO88024TOKENBUS                      => 'iso88024TokenBus',
-        self::IF_TYPE_ISO88025TOKENRING                      => 'iso88025TokenRing',
-        self::IF_TYPE_ISO88026MAN                      => 'iso88026Man',
-        self::IF_TYPE_STARLAN                      => 'starLan',
-        self::IF_TYPE_PROTEON10MBIT                      => 'proteon10Mbit',
-        self::IF_TYPE_PROTEON80MBIT                      => 'proteon80Mbit',
-        self::IF_TYPE_HYPERCHANNEL                      => 'hyperchannel',
-        self::IF_TYPE_FDDI                      => 'fddi',
-        self::IF_TYPE_LAPB                      => 'lapb',
-        self::IF_TYPE_SDLC                      => 'sdlc',
-        self::IF_TYPE_DS1                      => 'ds1',
-        self::IF_TYPE_E1                      => 'e1',
-        self::IF_TYPE_BASICISDN                      => 'basicISDN',
-        self::IF_TYPE_PRIMARYISDN                      => 'primaryISDN',
-        self::IF_TYPE_PROPPOINTTOPOINTSERIAL                      => 'propPointToPointSerial',
-        self::IF_TYPE_PPP                      => 'ppp',
-        self::IF_TYPE_SOFTWARELOOPBACK                      => 'softwareLoopback',
-        self::IF_TYPE_EON                      => 'eon',
-        self::IF_TYPE_ETHERNET3MBIT                      => 'ethernet3Mbit',
-        self::IF_TYPE_NSIP                      => 'nsip',
-        self::IF_TYPE_SLIP                      => 'slip',
-        self::IF_TYPE_ULTRA                      => 'ultra',
-        self::IF_TYPE_DS3                      => 'ds3',
-        self::IF_TYPE_SIP                      => 'sip',
-        self::IF_TYPE_FRAMERELAY                      => 'frameRelay',
-        self::IF_TYPE_RS232                      => 'rs232',
-        self::IF_TYPE_PARA                      => 'para',
-        self::IF_TYPE_ARCNET                      => 'arcnet',
-        self::IF_TYPE_ARCNETPLUS                      => 'arcnetPlus',
-        self::IF_TYPE_ATM                      => 'atm',
-        self::IF_TYPE_MIOX25                      => 'miox25',
-        self::IF_TYPE_SONET                      => 'sonet',
-        self::IF_TYPE_X25PLE                      => 'x25ple',
-        self::IF_TYPE_ISO88022LLC                      => 'iso88022llc',
-        self::IF_TYPE_LOCALTALK                      => 'localTalk',
-        self::IF_TYPE_SMDSDXI                      => 'smdsDxi',
-        self::IF_TYPE_FRAMERELAYSERVICE                      => 'frameRelayService',
-        self::IF_TYPE_V35                      => 'v35',
-        self::IF_TYPE_HSSI                      => 'hssi',
-        self::IF_TYPE_HIPPI                      => 'hippi',
-        self::IF_TYPE_MODEM                      => 'modem',
-        self::IF_TYPE_AAL5                      => 'aal5',
-        self::IF_TYPE_SONETPATH                      => 'sonetPath',
-        self::IF_TYPE_SONETVT                      => 'sonetVT',
-        self::IF_TYPE_SMDSICIP                      => 'smdsIcip',
-        self::IF_TYPE_PROPVIRTUAL                      => 'propVirtual',
-        self::IF_TYPE_PROPMULTIPLEXOR                      => 'propMultiplexor',
-        self::IF_TYPE_IEEE80212                      => 'ieee80212',
-        self::IF_TYPE_FIBRECHANNEL                      => 'fibreChannel',
-        self::IF_TYPE_HIPPIINTERFACE                      => 'hippiInterface',
-        self::IF_TYPE_FRAMERELAYINTERCONNECT                      => 'frameRelayInterconnect',
-        self::IF_TYPE_AFLANE8023                      => 'aflane8023',
-        self::IF_TYPE_AFLANE8025                      => 'aflane8025',
-        self::IF_TYPE_CCTEMUL                      => 'cctEmul',
-        self::IF_TYPE_FASTETHER                      => 'fastEther',
-        self::IF_TYPE_ISDN                      => 'isdn',
-        self::IF_TYPE_V11                      => 'v11',
-        self::IF_TYPE_V36                      => 'v36',
-        self::IF_TYPE_G703AT64K                      => 'g703at64k',
-        self::IF_TYPE_G703AT2MB                      => 'g703at2mb',
-        self::IF_TYPE_QLLC                      => 'qllc',
-        self::IF_TYPE_FASTETHERFX                      => 'fastEtherFX',
-        self::IF_TYPE_CHANNEL                      => 'channel',
-        self::IF_TYPE_IEEE80211                      => 'ieee80211',
-        self::IF_TYPE_IBM370PARCHAN                      => 'ibm370parChan',
-        self::IF_TYPE_ESCON                      => 'escon',
-        self::IF_TYPE_DLSW                      => 'dlsw',
-        self::IF_TYPE_ISDNS                      => 'isdns',
-        self::IF_TYPE_ISDNU                      => 'isdnu',
-        self::IF_TYPE_LAPD                      => 'lapd',
-        self::IF_TYPE_IPSWITCH                      => 'ipSwitch',
-        self::IF_TYPE_RSRB                      => 'rsrb',
-        self::IF_TYPE_ATMLOGICAL                      => 'atmLogical',
-        self::IF_TYPE_DS0                      => 'ds0',
-        self::IF_TYPE_DS0BUNDLE                      => 'ds0Bundle',
-        self::IF_TYPE_BSC                      => 'bsc',
-        self::IF_TYPE_ASYNC                      => 'async',
-        self::IF_TYPE_CNR                      => 'cnr',
-        self::IF_TYPE_ISO88025DTR                      => 'iso88025Dtr',
-        self::IF_TYPE_EPLRS                      => 'eplrs',
-        self::IF_TYPE_ARAP                      => 'arap',
-        self::IF_TYPE_PROPCNLS                      => 'propCnls',
-        self::IF_TYPE_HOSTPAD                      => 'hostPad',
-        self::IF_TYPE_TERMPAD                      => 'termPad',
-        self::IF_TYPE_FRAMERELAYMPI                      => 'frameRelayMPI',
-        self::IF_TYPE_X213                      => 'x213',
-        self::IF_TYPE_ADSL                      => 'adsl',
-        self::IF_TYPE_RADSL                      => 'radsl',
-        self::IF_TYPE_SDSL                      => 'sdsl',
-        self::IF_TYPE_VDSL                      => 'vdsl',
-        self::IF_TYPE_ISO88025CRFPINT                      => 'iso88025CRFPInt',
-        self::IF_TYPE_MYRINET                      => 'myrinet',
-        self::IF_TYPE_VOICEEM                      => 'voiceEM',
-        self::IF_TYPE_VOICEFXO                      => 'voiceFXO',
-        self::IF_TYPE_VOICEFXS                      => 'voiceFXS',
-        self::IF_TYPE_VOICEENCAP                      => 'voiceEncap',
-        self::IF_TYPE_VOICEOVERIP                      => 'voiceOverIp',
-        self::IF_TYPE_ATMDXI                      => 'atmDxi',
-        self::IF_TYPE_ATMFUNI                      => 'atmFuni',
-        self::IF_TYPE_ATMIMA                      => 'atmIma',
-        self::IF_TYPE_PPPMULTILINKBUNDLE                      => 'pppMultilinkBundle',
-        self::IF_TYPE_IPOVERCDLC                      => 'ipOverCdlc',
-        self::IF_TYPE_IPOVERCLAW                      => 'ipOverClaw',
-        self::IF_TYPE_STACKTOSTACK                      => 'stackToStack',
-        self::IF_TYPE_VIRTUALIPADDRESS                      => 'virtualIpAddress',
-        self::IF_TYPE_MPC                      => 'mpc',
-        self::IF_TYPE_IPOVERATM                      => 'ipOverAtm',
-        self::IF_TYPE_ISO88025FIBER                      => 'iso88025Fiber',
-        self::IF_TYPE_TDLC                      => 'tdlc',
-        self::IF_TYPE_GIGABITETHERNET                      => 'gigabitEthernet',
-        self::IF_TYPE_HDLC                      => 'hdlc',
-        self::IF_TYPE_LAPF                      => 'lapf',
-        self::IF_TYPE_V37                      => 'v37',
-        self::IF_TYPE_X25MLP                      => 'x25mlp',
-        self::IF_TYPE_X25HUNTGROUP                      => 'x25huntGroup',
-        self::IF_TYPE_TRASNPHDLC                      => 'trasnpHdlc',
-        self::IF_TYPE_INTERLEAVE                      => 'interleave',
-        self::IF_TYPE_FAST                      => 'fast',
-        self::IF_TYPE_IP                      => 'ip',
-        self::IF_TYPE_DOCSCABLEMACLAYER                      => 'docsCableMaclayer',
-        self::IF_TYPE_DOCSCABLEDOWNSTREAM                      => 'docsCableDownstream',
-        self::IF_TYPE_DOCSCABLEUPSTREAM                      => 'docsCableUpstream',
-        self::IF_TYPE_A12MPPSWITCH                      => 'a12MppSwitch',
-        self::IF_TYPE_TUNNEL                      => 'tunnel',
-        self::IF_TYPE_COFFEE                      => 'coffee',
-        self::IF_TYPE_CES                      => 'ces',
-        self::IF_TYPE_ATMSUBINTERFACE                      => 'atmSubInterface',
-        self::IF_TYPE_L2VLAN                      => 'l2vlan',
-        self::IF_TYPE_L3IPVLAN                      => 'l3ipvlan',
-        self::IF_TYPE_L3IPXVLAN                      => 'l3ipxvlan',
-        self::IF_TYPE_DIGITALPOWERLINE                      => 'digitalPowerline',
-        self::IF_TYPE_MEDIAMAILOVERIP                      => 'mediaMailOverIp',
-        self::IF_TYPE_DTM                      => 'dtm',
-        self::IF_TYPE_DCN                      => 'dcn',
-        self::IF_TYPE_IPFORWARD                      => 'ipForward',
-        self::IF_TYPE_MSDSL                      => 'msdsl',
-        self::IF_TYPE_IEEE1394                      => 'ieee1394',
-        self::IF_TYPE_IF_GSN                      => 'if-gsn',
-        self::IF_TYPE_DVBRCCMACLAYER                      => 'dvbRccMacLayer',
-        self::IF_TYPE_DVBRCCDOWNSTREAM                      => 'dvbRccDownstream',
-        self::IF_TYPE_DVBRCCUPSTREAM                      => 'dvbRccUpstream',
-        self::IF_TYPE_ATMVIRTUAL                      => 'atmVirtual',
-        self::IF_TYPE_MPLSTUNNEL                      => 'mplsTunnel',
-        self::IF_TYPE_SRP                      => 'srp',
-        self::IF_TYPE_VOICEOVERATM                      => 'voiceOverAtm',
-        self::IF_TYPE_VOICEOVERFRAMERELAY                      => 'voiceOverFrameRelay',
-        self::IF_TYPE_IDSL                      => 'idsl',
-        self::IF_TYPE_COMPOSITELINK                      => 'compositeLink',
-        self::IF_TYPE_SS7SIGLINK                      => 'ss7SigLink',
-        self::IF_TYPE_PROPWIRELESSP2P                      => 'propWirelessP2P',
-        self::IF_TYPE_FRFORWARD                      => 'frForward',
-        self::IF_TYPE_RFC1483                      => 'rfc1483',
-        self::IF_TYPE_USB                      => 'usb',
-        self::IF_TYPE_IEEE8023ADLAG                      => 'ieee8023adLag',
-        self::IF_TYPE_BGPPOLICYACCOUNTING                      => 'bgppolicyaccounting',
-        self::IF_TYPE_FRF16MFRBUNDLE                      => 'frf16MfrBundle',
-        self::IF_TYPE_H323GATEKEEPER                      => 'h323Gatekeeper',
-        self::IF_TYPE_H323PROXY                      => 'h323Proxy',
-        self::IF_TYPE_MPLS                      => 'mpls',
-        self::IF_TYPE_MFSIGLINK                      => 'mfSigLink',
-        self::IF_TYPE_HDSL2                      => 'hdsl2',
-        self::IF_TYPE_SHDSL                      => 'shdsl',
-        self::IF_TYPE_DS1FDL                      => 'ds1FDL',
-        self::IF_TYPE_POS                      => 'pos',
-        self::IF_TYPE_DVBASIIN                      => 'dvbAsiIn',
-        self::IF_TYPE_DVBASIOUT                      => 'dvbAsiOut',
-        self::IF_TYPE_PLC                      => 'plc',
-        self::IF_TYPE_NFAS                      => 'nfas',
-        self::IF_TYPE_TR008                      => 'tr008',
-        self::IF_TYPE_GR303RDT                      => 'gr303RDT',
-        self::IF_TYPE_GR303IDT                      => 'gr303IDT',
-        self::IF_TYPE_ISUP                      => 'isup',
-        self::IF_TYPE_PROPDOCSWIRELESSMACLAYER                      => 'propDocsWirelessMaclayer',
-        self::IF_TYPE_PROPDOCSWIRELESSDOWNSTREAM                      => 'propDocsWirelessDownstream',
-        self::IF_TYPE_PROPDOCSWIRELESSUPSTREAM                      => 'propDocsWirelessUpstream',
-        self::IF_TYPE_HIPERLAN2                      => 'hiperlan2',
-        self::IF_TYPE_PROPBWAP2MP                      => 'propBWAp2Mp',
-        self::IF_TYPE_SONETOVERHEADCHANNEL                      => 'sonetOverheadChannel',
-        self::IF_TYPE_DIGITALWRAPPEROVERHEADCHANNEL                      => 'digitalWrapperOverheadChannel',
-        self::IF_TYPE_AAL2                      => 'aal2',
-        self::IF_TYPE_RADIOMAC                      => 'radioMAC',
-        self::IF_TYPE_ATMRADIO                      => 'atmRadio',
-        self::IF_TYPE_IMT                      => 'imt',
-        self::IF_TYPE_MVL                      => 'mvl',
-        self::IF_TYPE_REACHDSL                      => 'reachDSL',
-        self::IF_TYPE_FRDLCIENDPT                      => 'frDlciEndPt',
-        self::IF_TYPE_ATMVCIENDPT                      => 'atmVciEndPt',
-        self::IF_TYPE_OPTICALCHANNEL                      => 'opticalChannel',
-        self::IF_TYPE_OPTICALTRANSPORT                      => 'opticalTransport',
-        self::IF_TYPE_PROPATM                      => 'propAtm',
-        self::IF_TYPE_VOICEOVERCABLE                      => 'voiceOverCable',
-        self::IF_TYPE_INFINIBAND                      => 'infiniband',
-        self::IF_TYPE_TELINK                      => 'teLink',
-        self::IF_TYPE_Q2931                      => 'q2931',
-        self::IF_TYPE_VIRTUALTG                      => 'virtualTg',
-        self::IF_TYPE_SIPTG                      => 'sipTg',
-        self::IF_TYPE_SIPSIG                      => 'sipSig',
-        self::IF_TYPE_DOCSCABLEUPSTREAMCHANNEL                      => 'docsCableUpstreamChannel',
-        self::IF_TYPE_ECONET                      => 'econet',
-        self::IF_TYPE_PON155                      => 'pon155',
-        self::IF_TYPE_PON622                      => 'pon622',
-        self::IF_TYPE_BRIDGE                      => 'bridge',
-        self::IF_TYPE_LINEGROUP                      => 'linegroup',
-        self::IF_TYPE_VOICEEMFGD                      => 'voiceEMFGD',
-        self::IF_TYPE_VOICEFGDEANA                      => 'voiceFGDEANA',
-        self::IF_TYPE_VOICEDID                      => 'voiceDID',
-        self::IF_TYPE_MPEGTRANSPORT                      => 'mpegTransport',
-        self::IF_TYPE_SIXTOFOUR                      => 'sixToFour',
-        self::IF_TYPE_GTP                      => 'gtp',
-        self::IF_TYPE_PDNETHERLOOP1                      => 'pdnEtherLoop1',
-        self::IF_TYPE_PDNETHERLOOP2                      => 'pdnEtherLoop2',
-        self::IF_TYPE_OPTICALCHANNELGROUP                      => 'opticalChannelGroup',
-        self::IF_TYPE_HOMEPNA                      => 'homepna',
-        self::IF_TYPE_GFP                      => 'gfp',
-        self::IF_TYPE_CISCOISLVLAN                      => 'ciscoISLvlan',
-        self::IF_TYPE_ACTELISMETALOOP                      => 'actelisMetaLOOP',
-        self::IF_TYPE_FCIPLINK                      => 'fcipLink',
-        self::IF_TYPE_RPR                      => 'rpr',
-        self::IF_TYPE_QAM                      => 'qam',
-        self::IF_TYPE_LMP                      => 'lmp',
-        self::IF_TYPE_CBLVECTASTAR                      => 'cblVectaStar',
-        self::IF_TYPE_DOCSCABLEMCMTSDOWNSTREAM                      => 'docsCableMCmtsDownstream',
-        self::IF_TYPE_ADSL2                      => 'adsl2',
-        self::IF_TYPE_MACSECCONTROLLEDIF                      => 'macSecControlledIF',
-        self::IF_TYPE_MACSECUNCONTROLLEDIF                      => 'macSecUncontrolledIF',
-        self::IF_TYPE_AVICIOPTICALETHER                      => 'aviciOpticalEther',
-        self::IF_TYPE_ATMBOND                      => 'atmbond'
+        self::IF_TYPE_OTHER => 'other',
+        self::IF_TYPE_REGULAR1822 => 'regular1822',
+        self::IF_TYPE_HDH1822 => 'hdh1822',
+        self::IF_TYPE_DDNX25 => 'ddnX25',
+        self::IF_TYPE_RFC877X25 => 'rfc877x25',
+        self::IF_TYPE_ETHERNETCSMACD => 'ethernetCsmacd',
+        self::IF_TYPE_ISO88023CSMACD => 'iso88023Csmacd',
+        self::IF_TYPE_ISO88024TOKENBUS => 'iso88024TokenBus',
+        self::IF_TYPE_ISO88025TOKENRING => 'iso88025TokenRing',
+        self::IF_TYPE_ISO88026MAN => 'iso88026Man',
+        self::IF_TYPE_STARLAN => 'starLan',
+        self::IF_TYPE_PROTEON10MBIT => 'proteon10Mbit',
+        self::IF_TYPE_PROTEON80MBIT => 'proteon80Mbit',
+        self::IF_TYPE_HYPERCHANNEL => 'hyperchannel',
+        self::IF_TYPE_FDDI => 'fddi',
+        self::IF_TYPE_LAPB => 'lapb',
+        self::IF_TYPE_SDLC => 'sdlc',
+        self::IF_TYPE_DS1 => 'ds1',
+        self::IF_TYPE_E1 => 'e1',
+        self::IF_TYPE_BASICISDN => 'basicISDN',
+        self::IF_TYPE_PRIMARYISDN => 'primaryISDN',
+        self::IF_TYPE_PROPPOINTTOPOINTSERIAL => 'propPointToPointSerial',
+        self::IF_TYPE_PPP => 'ppp',
+        self::IF_TYPE_SOFTWARELOOPBACK => 'softwareLoopback',
+        self::IF_TYPE_EON => 'eon',
+        self::IF_TYPE_ETHERNET3MBIT => 'ethernet3Mbit',
+        self::IF_TYPE_NSIP => 'nsip',
+        self::IF_TYPE_SLIP => 'slip',
+        self::IF_TYPE_ULTRA => 'ultra',
+        self::IF_TYPE_DS3 => 'ds3',
+        self::IF_TYPE_SIP => 'sip',
+        self::IF_TYPE_FRAMERELAY => 'frameRelay',
+        self::IF_TYPE_RS232 => 'rs232',
+        self::IF_TYPE_PARA => 'para',
+        self::IF_TYPE_ARCNET => 'arcnet',
+        self::IF_TYPE_ARCNETPLUS => 'arcnetPlus',
+        self::IF_TYPE_ATM => 'atm',
+        self::IF_TYPE_MIOX25 => 'miox25',
+        self::IF_TYPE_SONET => 'sonet',
+        self::IF_TYPE_X25PLE => 'x25ple',
+        self::IF_TYPE_ISO88022LLC => 'iso88022llc',
+        self::IF_TYPE_LOCALTALK => 'localTalk',
+        self::IF_TYPE_SMDSDXI => 'smdsDxi',
+        self::IF_TYPE_FRAMERELAYSERVICE => 'frameRelayService',
+        self::IF_TYPE_V35 => 'v35',
+        self::IF_TYPE_HSSI => 'hssi',
+        self::IF_TYPE_HIPPI => 'hippi',
+        self::IF_TYPE_MODEM => 'modem',
+        self::IF_TYPE_AAL5 => 'aal5',
+        self::IF_TYPE_SONETPATH => 'sonetPath',
+        self::IF_TYPE_SONETVT => 'sonetVT',
+        self::IF_TYPE_SMDSICIP => 'smdsIcip',
+        self::IF_TYPE_PROPVIRTUAL => 'propVirtual',
+        self::IF_TYPE_PROPMULTIPLEXOR => 'propMultiplexor',
+        self::IF_TYPE_IEEE80212 => 'ieee80212',
+        self::IF_TYPE_FIBRECHANNEL => 'fibreChannel',
+        self::IF_TYPE_HIPPIINTERFACE => 'hippiInterface',
+        self::IF_TYPE_FRAMERELAYINTERCONNECT => 'frameRelayInterconnect',
+        self::IF_TYPE_AFLANE8023 => 'aflane8023',
+        self::IF_TYPE_AFLANE8025 => 'aflane8025',
+        self::IF_TYPE_CCTEMUL => 'cctEmul',
+        self::IF_TYPE_FASTETHER => 'fastEther',
+        self::IF_TYPE_ISDN => 'isdn',
+        self::IF_TYPE_V11 => 'v11',
+        self::IF_TYPE_V36 => 'v36',
+        self::IF_TYPE_G703AT64K => 'g703at64k',
+        self::IF_TYPE_G703AT2MB => 'g703at2mb',
+        self::IF_TYPE_QLLC => 'qllc',
+        self::IF_TYPE_FASTETHERFX => 'fastEtherFX',
+        self::IF_TYPE_CHANNEL => 'channel',
+        self::IF_TYPE_IEEE80211 => 'ieee80211',
+        self::IF_TYPE_IBM370PARCHAN => 'ibm370parChan',
+        self::IF_TYPE_ESCON => 'escon',
+        self::IF_TYPE_DLSW => 'dlsw',
+        self::IF_TYPE_ISDNS => 'isdns',
+        self::IF_TYPE_ISDNU => 'isdnu',
+        self::IF_TYPE_LAPD => 'lapd',
+        self::IF_TYPE_IPSWITCH => 'ipSwitch',
+        self::IF_TYPE_RSRB => 'rsrb',
+        self::IF_TYPE_ATMLOGICAL => 'atmLogical',
+        self::IF_TYPE_DS0 => 'ds0',
+        self::IF_TYPE_DS0BUNDLE => 'ds0Bundle',
+        self::IF_TYPE_BSC => 'bsc',
+        self::IF_TYPE_ASYNC => 'async',
+        self::IF_TYPE_CNR => 'cnr',
+        self::IF_TYPE_ISO88025DTR => 'iso88025Dtr',
+        self::IF_TYPE_EPLRS => 'eplrs',
+        self::IF_TYPE_ARAP => 'arap',
+        self::IF_TYPE_PROPCNLS => 'propCnls',
+        self::IF_TYPE_HOSTPAD => 'hostPad',
+        self::IF_TYPE_TERMPAD => 'termPad',
+        self::IF_TYPE_FRAMERELAYMPI => 'frameRelayMPI',
+        self::IF_TYPE_X213 => 'x213',
+        self::IF_TYPE_ADSL => 'adsl',
+        self::IF_TYPE_RADSL => 'radsl',
+        self::IF_TYPE_SDSL => 'sdsl',
+        self::IF_TYPE_VDSL => 'vdsl',
+        self::IF_TYPE_ISO88025CRFPINT => 'iso88025CRFPInt',
+        self::IF_TYPE_MYRINET => 'myrinet',
+        self::IF_TYPE_VOICEEM => 'voiceEM',
+        self::IF_TYPE_VOICEFXO => 'voiceFXO',
+        self::IF_TYPE_VOICEFXS => 'voiceFXS',
+        self::IF_TYPE_VOICEENCAP => 'voiceEncap',
+        self::IF_TYPE_VOICEOVERIP => 'voiceOverIp',
+        self::IF_TYPE_ATMDXI => 'atmDxi',
+        self::IF_TYPE_ATMFUNI => 'atmFuni',
+        self::IF_TYPE_ATMIMA => 'atmIma',
+        self::IF_TYPE_PPPMULTILINKBUNDLE => 'pppMultilinkBundle',
+        self::IF_TYPE_IPOVERCDLC => 'ipOverCdlc',
+        self::IF_TYPE_IPOVERCLAW => 'ipOverClaw',
+        self::IF_TYPE_STACKTOSTACK => 'stackToStack',
+        self::IF_TYPE_VIRTUALIPADDRESS => 'virtualIpAddress',
+        self::IF_TYPE_MPC => 'mpc',
+        self::IF_TYPE_IPOVERATM => 'ipOverAtm',
+        self::IF_TYPE_ISO88025FIBER => 'iso88025Fiber',
+        self::IF_TYPE_TDLC => 'tdlc',
+        self::IF_TYPE_GIGABITETHERNET => 'gigabitEthernet',
+        self::IF_TYPE_HDLC => 'hdlc',
+        self::IF_TYPE_LAPF => 'lapf',
+        self::IF_TYPE_V37 => 'v37',
+        self::IF_TYPE_X25MLP => 'x25mlp',
+        self::IF_TYPE_X25HUNTGROUP => 'x25huntGroup',
+        self::IF_TYPE_TRASNPHDLC => 'trasnpHdlc',
+        self::IF_TYPE_INTERLEAVE => 'interleave',
+        self::IF_TYPE_FAST => 'fast',
+        self::IF_TYPE_IP => 'ip',
+        self::IF_TYPE_DOCSCABLEMACLAYER => 'docsCableMaclayer',
+        self::IF_TYPE_DOCSCABLEDOWNSTREAM => 'docsCableDownstream',
+        self::IF_TYPE_DOCSCABLEUPSTREAM => 'docsCableUpstream',
+        self::IF_TYPE_A12MPPSWITCH => 'a12MppSwitch',
+        self::IF_TYPE_TUNNEL => 'tunnel',
+        self::IF_TYPE_COFFEE => 'coffee',
+        self::IF_TYPE_CES => 'ces',
+        self::IF_TYPE_ATMSUBINTERFACE => 'atmSubInterface',
+        self::IF_TYPE_L2VLAN => 'l2vlan',
+        self::IF_TYPE_L3IPVLAN => 'l3ipvlan',
+        self::IF_TYPE_L3IPXVLAN => 'l3ipxvlan',
+        self::IF_TYPE_DIGITALPOWERLINE => 'digitalPowerline',
+        self::IF_TYPE_MEDIAMAILOVERIP => 'mediaMailOverIp',
+        self::IF_TYPE_DTM => 'dtm',
+        self::IF_TYPE_DCN => 'dcn',
+        self::IF_TYPE_IPFORWARD => 'ipForward',
+        self::IF_TYPE_MSDSL => 'msdsl',
+        self::IF_TYPE_IEEE1394 => 'ieee1394',
+        self::IF_TYPE_IF_GSN => 'if-gsn',
+        self::IF_TYPE_DVBRCCMACLAYER => 'dvbRccMacLayer',
+        self::IF_TYPE_DVBRCCDOWNSTREAM => 'dvbRccDownstream',
+        self::IF_TYPE_DVBRCCUPSTREAM => 'dvbRccUpstream',
+        self::IF_TYPE_ATMVIRTUAL => 'atmVirtual',
+        self::IF_TYPE_MPLSTUNNEL => 'mplsTunnel',
+        self::IF_TYPE_SRP => 'srp',
+        self::IF_TYPE_VOICEOVERATM => 'voiceOverAtm',
+        self::IF_TYPE_VOICEOVERFRAMERELAY => 'voiceOverFrameRelay',
+        self::IF_TYPE_IDSL => 'idsl',
+        self::IF_TYPE_COMPOSITELINK => 'compositeLink',
+        self::IF_TYPE_SS7SIGLINK => 'ss7SigLink',
+        self::IF_TYPE_PROPWIRELESSP2P => 'propWirelessP2P',
+        self::IF_TYPE_FRFORWARD => 'frForward',
+        self::IF_TYPE_RFC1483 => 'rfc1483',
+        self::IF_TYPE_USB => 'usb',
+        self::IF_TYPE_IEEE8023ADLAG => 'ieee8023adLag',
+        self::IF_TYPE_BGPPOLICYACCOUNTING => 'bgppolicyaccounting',
+        self::IF_TYPE_FRF16MFRBUNDLE => 'frf16MfrBundle',
+        self::IF_TYPE_H323GATEKEEPER => 'h323Gatekeeper',
+        self::IF_TYPE_H323PROXY => 'h323Proxy',
+        self::IF_TYPE_MPLS => 'mpls',
+        self::IF_TYPE_MFSIGLINK => 'mfSigLink',
+        self::IF_TYPE_HDSL2 => 'hdsl2',
+        self::IF_TYPE_SHDSL => 'shdsl',
+        self::IF_TYPE_DS1FDL => 'ds1FDL',
+        self::IF_TYPE_POS => 'pos',
+        self::IF_TYPE_DVBASIIN => 'dvbAsiIn',
+        self::IF_TYPE_DVBASIOUT => 'dvbAsiOut',
+        self::IF_TYPE_PLC => 'plc',
+        self::IF_TYPE_NFAS => 'nfas',
+        self::IF_TYPE_TR008 => 'tr008',
+        self::IF_TYPE_GR303RDT => 'gr303RDT',
+        self::IF_TYPE_GR303IDT => 'gr303IDT',
+        self::IF_TYPE_ISUP => 'isup',
+        self::IF_TYPE_PROPDOCSWIRELESSMACLAYER => 'propDocsWirelessMaclayer',
+        self::IF_TYPE_PROPDOCSWIRELESSDOWNSTREAM => 'propDocsWirelessDownstream',
+        self::IF_TYPE_PROPDOCSWIRELESSUPSTREAM => 'propDocsWirelessUpstream',
+        self::IF_TYPE_HIPERLAN2 => 'hiperlan2',
+        self::IF_TYPE_PROPBWAP2MP => 'propBWAp2Mp',
+        self::IF_TYPE_SONETOVERHEADCHANNEL => 'sonetOverheadChannel',
+        self::IF_TYPE_DIGITALWRAPPEROVERHEADCHANNEL => 'digitalWrapperOverheadChannel',
+        self::IF_TYPE_AAL2 => 'aal2',
+        self::IF_TYPE_RADIOMAC => 'radioMAC',
+        self::IF_TYPE_ATMRADIO => 'atmRadio',
+        self::IF_TYPE_IMT => 'imt',
+        self::IF_TYPE_MVL => 'mvl',
+        self::IF_TYPE_REACHDSL => 'reachDSL',
+        self::IF_TYPE_FRDLCIENDPT => 'frDlciEndPt',
+        self::IF_TYPE_ATMVCIENDPT => 'atmVciEndPt',
+        self::IF_TYPE_OPTICALCHANNEL => 'opticalChannel',
+        self::IF_TYPE_OPTICALTRANSPORT => 'opticalTransport',
+        self::IF_TYPE_PROPATM => 'propAtm',
+        self::IF_TYPE_VOICEOVERCABLE => 'voiceOverCable',
+        self::IF_TYPE_INFINIBAND => 'infiniband',
+        self::IF_TYPE_TELINK => 'teLink',
+        self::IF_TYPE_Q2931 => 'q2931',
+        self::IF_TYPE_VIRTUALTG => 'virtualTg',
+        self::IF_TYPE_SIPTG => 'sipTg',
+        self::IF_TYPE_SIPSIG => 'sipSig',
+        self::IF_TYPE_DOCSCABLEUPSTREAMCHANNEL => 'docsCableUpstreamChannel',
+        self::IF_TYPE_ECONET => 'econet',
+        self::IF_TYPE_PON155 => 'pon155',
+        self::IF_TYPE_PON622 => 'pon622',
+        self::IF_TYPE_BRIDGE => 'bridge',
+        self::IF_TYPE_LINEGROUP => 'linegroup',
+        self::IF_TYPE_VOICEEMFGD => 'voiceEMFGD',
+        self::IF_TYPE_VOICEFGDEANA => 'voiceFGDEANA',
+        self::IF_TYPE_VOICEDID => 'voiceDID',
+        self::IF_TYPE_MPEGTRANSPORT => 'mpegTransport',
+        self::IF_TYPE_SIXTOFOUR => 'sixToFour',
+        self::IF_TYPE_GTP => 'gtp',
+        self::IF_TYPE_PDNETHERLOOP1 => 'pdnEtherLoop1',
+        self::IF_TYPE_PDNETHERLOOP2 => 'pdnEtherLoop2',
+        self::IF_TYPE_OPTICALCHANNELGROUP => 'opticalChannelGroup',
+        self::IF_TYPE_HOMEPNA => 'homepna',
+        self::IF_TYPE_GFP => 'gfp',
+        self::IF_TYPE_CISCOISLVLAN => 'ciscoISLvlan',
+        self::IF_TYPE_ACTELISMETALOOP => 'actelisMetaLOOP',
+        self::IF_TYPE_FCIPLINK => 'fcipLink',
+        self::IF_TYPE_RPR => 'rpr',
+        self::IF_TYPE_QAM => 'qam',
+        self::IF_TYPE_LMP => 'lmp',
+        self::IF_TYPE_CBLVECTASTAR => 'cblVectaStar',
+        self::IF_TYPE_DOCSCABLEMCMTSDOWNSTREAM => 'docsCableMCmtsDownstream',
+        self::IF_TYPE_ADSL2 => 'adsl2',
+        self::IF_TYPE_MACSECCONTROLLEDIF => 'macSecControlledIF',
+        self::IF_TYPE_MACSECUNCONTROLLEDIF => 'macSecUncontrolledIF',
+        self::IF_TYPE_AVICIOPTICALETHER => 'aviciOpticalEther',
+        self::IF_TYPE_ATMBOND => 'atmbond'
     );
 
     /**
@@ -2240,15 +2207,14 @@ class Iface extends \Cityware\Snmp\MIB
      * @see $IF_TYPES
      * @param boolean $translate If true, return the string representation
      * @return array An array of interface types
-    */
-    public function types( $translate = false )
-    {
-        $types = $this->getSNMP()->walk1d( self::OID_IF_TYPE );
+     */
+    public function types($translate = false) {
+        $types = $this->getSNMP()->walk1d(self::OID_IF_TYPE);
 
-        if( !$translate )
+        if (!$translate)
             return $types;
 
-        return $this->getSNMP()->translate( $types, self::$IF_TYPES );
+        return $this->getSNMP()->translate($types, self::$IF_TYPES);
     }
 
     /**
@@ -2259,9 +2225,8 @@ class Iface extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of STP port IDs (key) to interface IDs (value)
      */
-    public function bridgeBasePortIfIndexes()
-    {
-        return $this->getSNMP()->walk1d( self::OID_BRIDGE_BASE_PORT_IF_INDEX );
+    public function bridgeBasePortIfIndexes() {
+        return $this->getSNMP()->walk1d(self::OID_BRIDGE_BASE_PORT_IF_INDEX);
     }
 
 }

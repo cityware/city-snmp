@@ -5,15 +5,14 @@ namespace Cityware\Snmp\MIBS;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class Entity extends \Cityware\Snmp\MIB
-{
-    const OID_ENTITY_PHYSICAL_DESCRIPTION    = '.1.3.6.1.2.1.47.1.1.1.1.2';
-    const OID_ENTITY_PHYSICAL_CLASS          = '.1.3.6.1.2.1.47.1.1.1.1.5';
-    const OID_ENTITY_PHYSICAL_PARENT_REL_POS = '.1.3.6.1.2.1.47.1.1.1.1.6';
-    const OID_ENTITY_PHYSICAL_NAME           = '.1.3.6.1.2.1.47.1.1.1.1.7';
-    const OID_ENTITY_PHYSICAL_SERIALNUM      = '.1.3.6.1.2.1.47.1.1.1.1.11';
-    const OID_ENTITY_PHYSICAL_ALIAS          = '.1.3.6.1.2.1.47.1.1.1.1.14';
+class Entity extends \Cityware\Snmp\MIB {
 
+    const OID_ENTITY_PHYSICAL_DESCRIPTION = '.1.3.6.1.2.1.47.1.1.1.1.2';
+    const OID_ENTITY_PHYSICAL_CLASS = '.1.3.6.1.2.1.47.1.1.1.1.5';
+    const OID_ENTITY_PHYSICAL_PARENT_REL_POS = '.1.3.6.1.2.1.47.1.1.1.1.6';
+    const OID_ENTITY_PHYSICAL_NAME = '.1.3.6.1.2.1.47.1.1.1.1.7';
+    const OID_ENTITY_PHYSICAL_SERIALNUM = '.1.3.6.1.2.1.47.1.1.1.1.11';
+    const OID_ENTITY_PHYSICAL_ALIAS = '.1.3.6.1.2.1.47.1.1.1.1.14';
 
     /**
      * Returns an associate array of entPhysicalDescr
@@ -29,9 +28,8 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of entPhysicalDescr
      */
-    public function physicalDescription()
-    {
-        return $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_DESCRIPTION );
+    public function physicalDescription() {
+        return $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_DESCRIPTION);
     }
 
     /**
@@ -48,9 +46,8 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of entPhysicalName
      */
-    public function physicalName()
-    {
-        return $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_NAME );
+    public function physicalName() {
+        return $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_NAME);
     }
 
     /**
@@ -95,19 +92,18 @@ class Entity extends \Cityware\Snmp\MIB
      */
     const PHYSICAL_CLASS_PORT = 10;
 
-
     /**
      * Translator array for physical class types
      * @var array Translator array for physical class types
      */
     public static $ENTITY_PHSYICAL_CLASS = array(
-        self::PHYSICAL_CLASS_CHASSIS      => 'chassis',
-        self::PHYSICAL_CLASS_CONTAINER    => 'container',
+        self::PHYSICAL_CLASS_CHASSIS => 'chassis',
+        self::PHYSICAL_CLASS_CONTAINER => 'container',
         self::PHYSICAL_CLASS_POWER_SUPPLY => 'powerSupply',
-        self::PHYSICAL_CLASS_FAN          => 'fan',
-        self::PHYSICAL_CLASS_SENSOR       => 'sensor',
-        self::PHYSICAL_CLASS_MODULE       => 'module',
-        self::PHYSICAL_CLASS_PORT         => 'port'
+        self::PHYSICAL_CLASS_FAN => 'fan',
+        self::PHYSICAL_CLASS_SENSOR => 'sensor',
+        self::PHYSICAL_CLASS_MODULE => 'module',
+        self::PHYSICAL_CLASS_PORT => 'port'
     );
 
     /**
@@ -119,16 +115,15 @@ class Entity extends \Cityware\Snmp\MIB
      * @param boolean $translate If true, return the string representation via self::$ENTITY_PHSYICAL_CLASS
      * @return array Associate array of entPhysicalClass
      */
-    public function physicalClass( $translate = false )
-    {
-        $classes = $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_CLASS );
+    public function physicalClass($translate = false) {
+        $classes = $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_CLASS);
 
-        if( !$translate )
+        if (!$translate) {
             return $classes;
+        }
 
-        return $this->getSNMP()->translate( $classes, self::$ENTITY_PHSYICAL_CLASS );
+        return $this->getSNMP()->translate($classes, self::$ENTITY_PHSYICAL_CLASS);
     }
-
 
     /**
      * Returns an associate array of entPhysicalParentRelPos
@@ -138,9 +133,8 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of entPhysicalParentRelPos
      */
-    public function physicalParentRelPos()
-    {
-        return $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_PARENT_REL_POS );
+    public function physicalParentRelPos() {
+        return $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_PARENT_REL_POS);
     }
 
     /**
@@ -151,11 +145,9 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of physical aliases
      */
-    public function physicalAlias()
-    {
-        return $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_ALIAS );
+    public function physicalAlias() {
+        return $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_ALIAS);
     }
-
 
     /**
      * Utility function for MIBS\Cisco\RSTP::rstpPortRole() to try and translate a port index
@@ -166,21 +158,18 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return Array of relative positions to port IDs
      */
-    public function relPosToAlias()
-    {
+    public function relPosToAlias() {
         $rtn = [];
         $aliases = $this->physicalAlias();
-        foreach( $this->physicalParentRelPos() as $index => $pos )
-        {
-            if( isset( $aliases[ $index ] ) && strlen( $aliases[ $index ] )
-                    && is_numeric( $aliases[ $index ] ) && $aliases[ $index ] > 10000
-                    && !isset( $rtn[ $pos ] ) && $this->physicalClass()[ $index ] == self::PHYSICAL_CLASS_PORT )
-                $rtn[ $pos ] = $aliases[ $index ];
+        foreach ($this->physicalParentRelPos() as $index => $pos) {
+            if (isset($aliases[$index]) && strlen($aliases[$index]) && is_numeric($aliases[$index]) && $aliases[$index] > 10000 && !isset($rtn[$pos]) && $this->physicalClass()[$index] == self::PHYSICAL_CLASS_PORT) {
+                $rtn[$pos] = $aliases[$index];
+            }
         }
 
         return $rtn;
     }
-    
+
     /**
      * Returns an associate array of entPhysicalSerialNum
      *
@@ -193,10 +182,8 @@ class Entity extends \Cityware\Snmp\MIB
      *
      * @return array Associate array of entPhysicalSerialNum
      */
-    public function physicalSerialNum()
-    {
-        return $this->getSNMP()->walk1d( self::OID_ENTITY_PHYSICAL_SERIALNUM );
+    public function physicalSerialNum() {
+        return $this->getSNMP()->walk1d(self::OID_ENTITY_PHYSICAL_SERIALNUM);
     }
-
 
 }
