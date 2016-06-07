@@ -49,7 +49,7 @@ class System extends \Cityware\Snmp\MIB
 
 
     /**
-     * Returns the system uptime of the device
+     * Returns the system uptime of the device in seconds
      *
      * "The time (in hundredths of a second) since the
      * network management portion of the system was last
