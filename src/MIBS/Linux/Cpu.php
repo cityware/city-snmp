@@ -53,7 +53,7 @@ class Cpu extends \Cityware\Snmp\MIB {
      * @return Integer
      */
     public function loadIntOneMinute() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_1);
+        return $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_1);
     }
     
     /**
@@ -61,7 +61,7 @@ class Cpu extends \Cityware\Snmp\MIB {
      * @return Integer
      */
     public function loadIntFiveMinutes() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_5);
+        return $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_5);
     }
     
     /**
@@ -69,7 +69,7 @@ class Cpu extends \Cityware\Snmp\MIB {
      * @return Integer
      */
     public function loadIntFifteenMinutes() {
-        return (int) $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_15);
+        return $this->getSNMP()->get(self::OID_UCD_SNMPD_LALOAD_INT_15);
     }
         
     /**
