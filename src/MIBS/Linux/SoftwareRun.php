@@ -5,10 +5,11 @@ namespace Cityware\Snmp\MIBS\Linux;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class Processes extends \Cityware\Snmp\MIB {
+class SoftwareRun extends \Cityware\Snmp\MIB {
 
     const OID_HR_SW_RUN_TABLE = '.1.3.6.1.2.1.25.4.2.1';
     const OID_HR_SW_RUN_PERF_TABLE = '.1.3.6.1.2.1.25.5.1.1';
+    
     const OID_SOFTWARE_RUN_INDEX = '.1.3.6.1.2.1.25.4.2.1.1';
     const OID_SOFTWARE_RUN_NAME = '.1.3.6.1.2.1.25.4.2.1.2';
     const OID_SOFTWARE_RUN_ID = '.1.3.6.1.2.1.25.4.2.1.3';
@@ -18,8 +19,6 @@ class Processes extends \Cityware\Snmp\MIB {
     const OID_SOFTWARE_RUN_STATUS = '.1.3.6.1.2.1.25.4.2.1.7';
     const OID_SOFTWARE_RUN_CPU_USED = '.1.3.6.1.2.1.25.5.1.1.1';
     const OID_SOFTWARE_RUN_MEMORY_USED = '.1.3.6.1.2.1.25.5.1.1.2';
-    
-    private $hrSWRunTable, $hrSWRunPerfTable;
 
     /**
      * Returns Softwatre Run Full Data
@@ -27,16 +26,23 @@ class Processes extends \Cityware\Snmp\MIB {
      */
     public function softwareRunFullData() {
         
+        $hrSWRunTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_TABLE);
+        $aHrSWRunTable = $this->getSNMP()->processRealWalkIndex1d($hrSWRunTable);
+        
+        $hrSWRunPerfTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_PERF_TABLE);
+        $aHrSWRunPerfTable = $this->getSNMP()->processRealWalkIndex1d($hrSWRunPerfTable);
+
+        
         $aReturn = Array();
-        $aReturn['index'] = $this->softwareRunIndex();
-        $aReturn['name'] = $this->softwareRunName();
-        $aReturn['id'] = $this->softwareRunId();
-        $aReturn['path'] = $this->softwareRunPath();
-        $aReturn['parameters'] = $this->softwareRunParameters();
-        $aReturn['type'] = $this->softwareRunType();
-        $aReturn['status'] = $this->softwareRunStatus();
-        $aReturn['cpu'] = $this->softwareRunCpuUsed();
-        $aReturn['memory'] = $this->softwareRunMemoryUsed();
+        $aReturn['index'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_INDEX];
+        $aReturn['name'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_NAME];
+        $aReturn['id'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_ID];
+        $aReturn['path'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_PATH];
+        $aReturn['parameters'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_PARAMETERS];
+        $aReturn['type'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_TYPE];
+        $aReturn['status'] = $aHrSWRunTable[self::OID_SOFTWARE_RUN_STATUS];
+        $aReturn['cpu'] = $aHrSWRunPerfTable[self::OID_SOFTWARE_RUN_CPU_USED];
+        $aReturn['memory'] = $aHrSWRunPerfTable[self::OID_SOFTWARE_RUN_MEMORY_USED];
         return $aReturn;
     }
     

@@ -178,7 +178,7 @@ class SNMP {
                 throw new Exception('Invalid SNMP version: ' . $this->getVersion());
         }
     }
-    
+
     /**
      * Proxy to the snmp2_real_walk command
      *
@@ -202,8 +202,25 @@ class SNMP {
         foreach ($result as $_oid => $value) {
             $this->_lastResult[$_oid] = $this->parseSnmpValue($value);
         }
-        
+
         return $this->_lastResult;
+    }
+
+    public function processRealWalkIndex1d($arrayData, $oidPrefix = null) {
+        $result = array();
+
+        foreach ($arrayData as $_oid => $value) {
+
+            $oidPrefix = substr($_oid, 0, strrpos($_oid, '.'));
+
+            if (!isset($result[$oidPrefix])) {
+                $result[$oidPrefix] = Array();
+            }
+            $aIndexOid = str_replace($oidPrefix . ".", "", $_oid);
+            $result[$oidPrefix][$aIndexOid] = $this->parseSnmpValue($value);
+        }
+
+        return $result;
     }
 
     /**
@@ -541,7 +558,7 @@ class SNMP {
 
         $values = [ 0 => 'dummy'];
 
-        for ($i = 0; $i < strlen($str); $i++){
+        for ($i = 0; $i < strlen($str); $i++) {
             $values = array_merge($values, self::$HEX_STRING_WORDS_AS_ARRAY[$str[$i]]);
         }
 
@@ -564,17 +581,17 @@ class SNMP {
      */
     public static function translate($values, $translator) {
         if (!is_array($values)) {
-            if (isset($translator[$values])){
+            if (isset($translator[$values])) {
                 return $translator[$values];
-            }else{
+            } else {
                 return "*** UNKNOWN ***";
             }
         }
 
         foreach ($values as $k => $v) {
-            if (isset($translator[$v])){
+            if (isset($translator[$v])) {
                 $values[$k] = $translator[$v];
-            }else{
+            } else {
                 $values[$k] = "*** UNKNOWN ***";
             }
         }
@@ -824,7 +841,7 @@ class SNMP {
      * @return \Cityware\Snmp\Cache The cache object
      */
     public function getCache() {
-        if ($this->_cache === null){
+        if ($this->_cache === null) {
             $this->_cache = new \Cityware\Snmp\Cache\Basic();
         }
         return $this->_cache;
@@ -838,7 +855,7 @@ class SNMP {
      * @throws Exception
      */
     public function __call($method, $args) {
-        if (substr($method, 0, 3) == 'use'){
+        if (substr($method, 0, 3) == 'use') {
             return $this->useExtension(substr($method, 3), $args);
         }
 
@@ -866,7 +883,7 @@ class SNMP {
     }
 
     public function getPlatform() {
-        if ($this->_platform === null){
+        if ($this->_platform === null) {
             $this->_platform = new Platform($this);
         }
         return $this->_platform;
@@ -882,13 +899,13 @@ class SNMP {
      * @return array The resultant values
      */
     public function subOidWalkLong($oid, $positionS, $positionE) {
-        if ($this->cache() && ( $rtn = $this->getCache()->load($oid) ) !== null){
+        if ($this->cache() && ( $rtn = $this->getCache()->load($oid) ) !== null) {
             return $rtn;
         }
 
         $this->_lastResult = $this->realWalk($oid);
 
-        if ($this->_lastResult === false){
+        if ($this->_lastResult === false) {
             throw new Exception('Could not perform walk for OID ' . $oid);
         }
 
