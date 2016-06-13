@@ -180,7 +180,7 @@ class SNMP {
     }
 
     /**
-     * Proxy to the snmp2_real_walk command
+     * Proxy to the snmp2_real_walk command return array
      *
      * @param string $oid The OID to walk
      * @return array The results of the walk
@@ -206,7 +206,12 @@ class SNMP {
         return $this->_lastResult;
     }
 
-    public function processRealWalkIndex1d($arrayData, $oidPrefix = null) {
+    /**
+     * Get indexed Real Walk return values
+     * @param array $arrayData
+     * @return array
+     */
+    public function processRealWalkIndex1d($arrayData) {
         $result = array();
 
         foreach ($arrayData as $_oid => $value) {
