@@ -178,6 +178,33 @@ class SNMP {
                 throw new Exception('Invalid SNMP version: ' . $this->getVersion());
         }
     }
+    
+    /**
+     * Proxy to the snmp2_real_walk command
+     *
+     * @param string $oid The OID to walk
+     * @return array The results of the walk
+     */
+    public function realWalkToArray($oid) {
+        switch ($this->getVersion()) {
+            case 1:
+                $result = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
+                break;
+            case '2c':
+                $result = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
+                break;
+            case '3':
+                $result = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
+                break;
+            default:
+                throw new Exception('Invalid SNMP version: ' . $this->getVersion());
+        }
+        foreach ($result as $_oid => $value) {
+            $this->_lastResult[$_oid] = $this->parseSnmpValue($value);
+        }
+        
+        return $this->_lastResult;
+    }
 
     /**
      * Get a single SNMP value

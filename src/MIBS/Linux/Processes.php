@@ -18,15 +18,28 @@ class Processes extends \Cityware\Snmp\MIB {
     const OID_SOFTWARE_RUN_STATUS = '.1.3.6.1.2.1.25.4.2.1.7';
     const OID_SOFTWARE_RUN_CPU_USED = '.1.3.6.1.2.1.25.5.1.1.1';
     const OID_SOFTWARE_RUN_MEMORY_USED = '.1.3.6.1.2.1.25.5.1.1.2';
-
+    
     private $hrSWRunTable, $hrSWRunPerfTable;
 
-    public function __construct($snmpConnect) {
-        $this->setSNMP($snmpConnect);
-        $this->hrSWRunTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_TABLE);
-        $this->hrSWRunPerfTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_PERF_TABLE);
+    /**
+     * Returns Softwatre Run Full Data
+     * @return int
+     */
+    public function softwareRunFullData() {
+        
+        $aReturn = Array();
+        $aReturn['index'] = $this->softwareRunIndex();
+        $aReturn['name'] = $this->softwareRunName();
+        $aReturn['id'] = $this->softwareRunId();
+        $aReturn['path'] = $this->softwareRunPath();
+        $aReturn['parameters'] = $this->softwareRunParameters();
+        $aReturn['type'] = $this->softwareRunType();
+        $aReturn['status'] = $this->softwareRunStatus();
+        $aReturn['cpu'] = $this->softwareRunCpuUsed();
+        $aReturn['memory'] = $this->softwareRunMemoryUsed();
+        return $aReturn;
     }
-
+    
     /**
      * Returns Softwatre Run Index
      * @return int
@@ -39,16 +52,16 @@ class Processes extends \Cityware\Snmp\MIB {
      * Returns Softwatre Run Name
      * @return int
      */
-    public function softwareRunName($index) {
-        return $this->getSNMP()->parseSnmpValue($this->hrSWRunTable[self::OID_SOFTWARE_RUN_NAME . '.' . $index]);
+    public function softwareRunName() {
+        return $this->getSNMP()->walk1d(self::OID_SOFTWARE_RUN_NAME);
     }
 
     /**
      * Returns Softwatre Run ID
      * @return int
      */
-    public function softwareRunId($index) {
-        return $this->getSNMP()->parseSnmpValue($this->hrSWRunTable[self::OID_SOFTWARE_RUN_ID . '.' . $index]);
+    public function softwareRunId() {
+        return $this->getSNMP()->walk1d(self::OID_SOFTWARE_RUN_ID);
     }
 
     /**
@@ -108,7 +121,7 @@ class Processes extends \Cityware\Snmp\MIB {
 
         switch ($processTypeNum) {
             case 1:
-                $return = 'unknown';
+                $return = 'Unknown';
                 break;
             case 2:
                 $return = 'Operating System';
@@ -121,7 +134,36 @@ class Processes extends \Cityware\Snmp\MIB {
                 break;
 
             default:
-                $return = 'unknown';
+                $return = 'Unknown';
+                break;
+        }
+
+        return $return;
+    }
+    
+    /**
+     * Convert Software Run Status Number to Type Name
+     * @param integer $processTypeNum
+     * @return string
+     */
+    public function statusNumConvertName($processTypeNum) {
+
+        switch ($processTypeNum) {
+            case 1:
+                $return = 'Running';
+                break;
+            case 2:
+                $return = 'Runnable (Waiting for resource)';
+                break;
+            case 3:
+                $return = 'Not Runnable (Loaded but waiting for event)';
+                break;
+            case 4:
+                $return = 'Invalid (Not loaded)';
+                break;
+
+            default:
+                $return = 'Invalid';
                 break;
         }
 
