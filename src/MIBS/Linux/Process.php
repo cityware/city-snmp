@@ -18,7 +18,19 @@ class Process extends \Cityware\Snmp\MIB {
     const OID_SOFTWARE_RUN_STATUS = '.1.3.6.1.2.1.25.4.2.1.7';
     const OID_SOFTWARE_RUN_CPU_USED = '.1.3.6.1.2.1.25.5.1.1.1';
     const OID_SOFTWARE_RUN_MEMORY_USED = '.1.3.6.1.2.1.25.5.1.1.2';
+    
+    private $hrSWRunTable, $hrSWRunPerfTable;
 
+    /**
+     * Returns Softwatre Run Full Data
+     * @return int
+     */
+    public function softwareRunFullData() {
+        $this->hrSWRunTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_TABLE);
+        $this->hrSWRunPerfTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_PERF_TABLE);
+        return array_merge($this->hrSWRunTable, $this->hrSWRunPerfTable);
+    }
+    
     /**
      * Returns Softwatre Run Index
      * @return int

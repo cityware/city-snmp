@@ -5,7 +5,7 @@ namespace Cityware\Snmp\MIBS\Linux;
 /**
  * A class for performing SNMP V2 queries on generic devices
  */
-class Processors extends \Cityware\Snmp\MIB {
+class Processes extends \Cityware\Snmp\MIB {
 
     const OID_HR_SW_RUN_TABLE = '.1.3.6.1.2.1.25.4.2.1';
     const OID_HR_SW_RUN_PERF_TABLE = '.1.3.6.1.2.1.25.5.1.1';
@@ -23,8 +23,8 @@ class Processors extends \Cityware\Snmp\MIB {
 
     public function __construct($snmpConnect) {
         $this->setSNMP($snmpConnect);
-        $this->hrSWRunTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_TABLE);
-        $this->hrSWRunPerfTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_PERF_TABLE);
+        $this->hrSWRunTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_TABLE);
+        $this->hrSWRunPerfTable = $this->getSNMP()->realWalkToArray(self::OID_HR_SW_RUN_PERF_TABLE);
     }
 
     /**
