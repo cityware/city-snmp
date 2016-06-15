@@ -208,10 +208,13 @@ class SNMP {
 
     /**
      * Get indexed Real Walk return values
-     * @param array $arrayData
+     * @param string $oid
      * @return array
      */
-    public function processRealWalkIndex1d($arrayData) {
+    public function realWalk1d($oid) {
+        
+        $arrayData = $this->realWalk($oid);
+        
         $result = array();
 
         foreach ($arrayData as $_oid => $value) {

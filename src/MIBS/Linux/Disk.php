@@ -6,6 +6,8 @@ namespace Cityware\Snmp\MIBS\Linux;
  * A class for performing SNMP V2 queries on generic devices
  */
 class Disk extends \Cityware\Snmp\MIB {
+    
+    const OID_DISK = '.1.3.6.1.4.1.2021.9.1';
 
     const OID_DISK_INDEX = '.1.3.6.1.4.1.2021.9.1.1';
     const OID_DISK_PATH = '.1.3.6.1.4.1.2021.9.1.2';
@@ -26,6 +28,37 @@ class Disk extends \Cityware\Snmp\MIB {
     
     const OID_DISK_ERROR_FLAG = '.1.3.6.1.4.1.2021.9.1.100';
     const OID_DISK_ERROR_MSG = '.1.3.6.1.4.1.2021.9.1.101';
+    
+    /**
+     * Returns Full Data
+     * @return int
+     */
+    public function returnFullData() {
+        
+        $aDisk = $this->getSNMP()->realWalk1d(self::OID_DISK);
+        
+        $aReturn = Array();
+        $aReturn['index'] = $aDisk[self::OID_DISK_INDEX];
+        $aReturn['device'] = $aDisk[self::OID_DISK_DEVICE];
+        $aReturn['path'] = $aDisk[self::OID_DISK_PATH];
+        $aReturn['minimum_size'] = $aDisk[self::OID_DISK_MINIMUM];
+        $aReturn['minimum_percent'] = $aDisk[self::OID_DISK_MIN_PERCENT];
+        $aReturn['total_size'] = $aDisk[self::OID_DISK_TOTAL];
+        $aReturn['avaliable_size'] = $aDisk[self::OID_DISK_AVALIABLE];
+        $aReturn['used_size'] = $aDisk[self::OID_DISK_USED];
+        
+        $aReturn['used_percent'] = $aDisk[self::OID_DISK_USED_PERCENT];
+        $aReturn['node_percent'] = $aDisk[self::OID_DISK_NODE_PERCENT];
+        $aReturn['total_low'] = $aDisk[self::OID_DISK_TOTAL_LOW];
+        $aReturn['total_high'] = $aDisk[self::OID_DISK_TOTAL_HIGH];
+        $aReturn['avaliable_low'] = $aDisk[self::OID_DISK_AVALIABLE_LOW];
+        $aReturn['avaliable_high'] = $aDisk[self::OID_DISK_AVALIABLE_HIGH];
+        $aReturn['used_low'] = $aDisk[self::OID_DISK_USED_LOW];
+        $aReturn['used_high'] = $aDisk[self::OID_DISK_USED_HIGH];
+        $aReturn['error_flag'] = $aDisk[self::OID_DISK_ERROR_FLAG];
+        $aReturn['error_msg'] = $aDisk[self::OID_DISK_ERROR_MSG];
+        return $aReturn;
+    }
 
     /**
      * Returns Integer reference number (row number) for the disk mib

@@ -21,16 +21,13 @@ class SoftwareRun extends \Cityware\Snmp\MIB {
     const OID_SOFTWARE_RUN_MEMORY_USED = '.1.3.6.1.2.1.25.5.1.1.2';
 
     /**
-     * Returns Softwatre Run Full Data
+     * Returns Full Data
      * @return int
      */
-    public function softwareRunFullData() {
+    public function returnFullData() {
         
-        $hrSWRunTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_TABLE);
-        $aHrSWRunTable = $this->getSNMP()->processRealWalkIndex1d($hrSWRunTable);
-        
-        $hrSWRunPerfTable = $this->getSNMP()->realWalk(self::OID_HR_SW_RUN_PERF_TABLE);
-        $aHrSWRunPerfTable = $this->getSNMP()->processRealWalkIndex1d($hrSWRunPerfTable);
+        $aHrSWRunTable = $this->getSNMP()->realWalk1d(self::OID_HR_SW_RUN_TABLE);
+        $aHrSWRunPerfTable = $this->getSNMP()->realWalk1d(self::OID_HR_SW_RUN_PERF_TABLE);
 
         
         $aReturn = Array();

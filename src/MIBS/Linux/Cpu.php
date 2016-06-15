@@ -6,11 +6,15 @@ namespace Cityware\Snmp\MIBS\Linux;
  * A class for performing SNMP V2 queries on generic devices
  */
 class Cpu extends \Cityware\Snmp\MIB {
+    
+    const OID_CPU = '.1.3.6.1.4.1.2021.11';
+    const OID_LOAD = '.1.3.6.1.4.1.2021.10.1.3';
+    const OID_LOAD_INT = '.1.3.6.1.4.1.2021.10.1.5';
 
     const OID_1_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.1';
     const OID_5_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.2';
     const OID_15_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.3';
-    
+        
     const OID_UCD_SNMPD_LALOAD_INT_1  = '.1.3.6.1.4.1.2021.10.1.5.1';
     const OID_UCD_SNMPD_LALOAD_INT_5 = '.1.3.6.1.4.1.2021.10.1.5.2';
     const OID_UCD_SNMPD_LALOAD_INT_15 = '.1.3.6.1.4.1.2021.10.1.5.3';

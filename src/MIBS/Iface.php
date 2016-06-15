@@ -30,6 +30,8 @@ class Iface extends \Cityware\Snmp\MIB {
     const OID_IF_OUT_ERRORS = '.1.3.6.1.2.1.2.2.1.20';
     const OID_IF_OUT_QUEUE_LENGTH = '.1.3.6.1.2.1.2.2.1.21';
     const OID_IF_NAME = '.1.3.6.1.2.1.31.1.1.1.1';
+    const OID_IF_HIGH_SPEED = '.1.3.6.1.2.1.31.1.1.1.15';
+    const OID_IF_ALIAS = '.1.3.6.1.2.1.31.1.1.1.18';
     const OID_IF_IN_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.2';  // no fn() implemented
     const OID_IF_IN_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.3';  // no fn() implemented
     const OID_IF_OUT_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.4';  // no fn() implemented
@@ -43,10 +45,8 @@ class Iface extends \Cityware\Snmp\MIB {
     const OID_IF_HC_OUT_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.12'; // no fn() implemented
     const OID_IF_HC_OUT_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.13'; // no fn() implemented
     const OID_IF_LINK_UP_DOWN_TRAP = '.1.3.6.1.2.1.31.1.1.1.14'; // no fn() implemented
-    const OID_IF_HIGH_SPEED = '.1.3.6.1.2.1.31.1.1.1.15';
     const OID_IF_PROMISCUOUS_MODE = '.1.3.6.1.2.1.31.1.1.1.16'; // no fn() implemented
     const OID_IF_CONNECTOR_PRESENT = '.1.3.6.1.2.1.31.1.1.1.17'; // no fn() implemented
-    const OID_IF_ALIAS = '.1.3.6.1.2.1.31.1.1.1.18';
     const OID_IF_COUNTER_DISCONTINUTIY = '.1.3.6.1.2.1.31.1.1.1.19'; // no fn() implemented
 
     /**
