@@ -19,4 +19,8 @@ if (substr($sysDescr, 0, 9) == 'ProCurve ') {
     } catch (Exception $e) {
         $this->setSerialNumber('(error)');
     }
+} else if (preg_match('/eCos-[0-9.]+/', $sysDescr)) {
+    $this->setVendor('Hewlett-Packard');
+    $this->setModel("Generic");
+    $this->setOs('ProCurve');
 }

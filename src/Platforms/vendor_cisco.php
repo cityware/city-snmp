@@ -36,4 +36,24 @@ if (substr($sysDescr, 0, 18) == 'Cisco IOS Software') {
     $this->setOs('IOS XR');
     $this->setOsVersion($matches[2]);
     $this->setOsDate(null);
+} else if (preg_match('/^Meraki MX/', $sysDescr)) {
+    $this->setVendor('Cisco Systems');
+    $this->setModel('Generic');
+    $this->setOs('Meraki MX');
+} else if (preg_match('/^Meraki MS/', $sysDescr)) {
+    $this->setVendor('Cisco Systems');
+    $this->setModel('Generic');
+    $this->setOs('Meraki MS');
+} else if (preg_match('/^Meraki MR/', $sysDescr)) {
+    $this->setVendor('Cisco Systems');
+    $this->setModel('Generic');
+    $this->setOs('Meraki MR');
+} else if (strstr($sysDescr, 'NX-OS(tm)')) {
+    $this->setVendor('Cisco Systems');
+    $this->setModel('Generic');
+    $this->setOs('NX-OS');
+} else if (strstr($sysDescr, 'SAN-OS')) {
+    $this->setVendor('Cisco Systems');
+    $this->setModel('Generic');
+    $this->setOs('SAN-OS');
 }

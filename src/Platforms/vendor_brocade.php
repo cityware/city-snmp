@@ -25,13 +25,17 @@ if (substr($sysDescr, 0, 8) == 'Brocade ') {
         $this->setOsDate(new \DateTime("{$matches[6]}/{$matches[5]}/{$matches[7]}:{$matches[8]} +0000"));
         $this->getOsDate()->setTimezone(new \DateTimeZone('UTC'));
     } else if (preg_match('/Foundry Networks, Inc. (.+),\sIronWare\sVersion\s(.+)\sCompiled\son\s(([a-zA-Z]+)\s(\d+)\s(\d+)\s)at\s((\d\d):(\d\d):(\d\d))\slabeled\sas\s(.+)/', $sysDescr, $matches)) {
-        echo "Vendor:   " . 'Foundry Networks' . "\n";
-        echo "Model:    " . $matches[1] . "\n";
-        echo "OS:       " . 'IronWare' . "\n";
-        echo "OS Ver:   " . $matches[2] . "\n";
-        $d = new \DateTime("{$matches[5]}/{$matches[4]}/{$matches[6]}:{$matches[7]} +0000");
+        $this->setVendor('Brocade');
+        $this->setModel($matches[1]);
+        $this->setOs('IronWare');
+        $this->setOsVersion($matches[2]);
+        $this->setOsDate(new \DateTime("{$matches[5]}/{$matches[4]}/{$matches[6]}:{$matches[7]} +0000"));
         $d->setTimezone(new \DateTimeZone('UTC'));
-        echo "OS Date:  " . $d->format('Y-m-d H:i:s') . "\n\n";
+        $this->getOsDate()->setTimezone(new \DateTimeZone('UTC'));
+    } else if (strstr($sysDescr, "Brocade VDX")) {
+        $this->setVendor('Brocade');
+        $this->setModel('Generic');
+        $this->setOs("NOS");
     }
 
     try {
@@ -39,4 +43,12 @@ if (substr($sysDescr, 0, 8) == 'Brocade ') {
     } catch (Exception $e) {
         $this->setSerialNumber('(error)');
     }
+} else if (preg_match('/^Vyatta/', $sysDescr)) {
+    $this->setVendor('Brocade');
+    $this->setModel('Generic');
+    $this->setOs("Vyatta");
+} else if (preg_match('/^Vyatta VyOS/', $sysDescr) || preg_match('/^VyOS/i', $sysDescr)) {
+    $this->setVendor('Brocade');
+    $this->setModel('Generic');
+    $this->setOs("VyOS");
 }
