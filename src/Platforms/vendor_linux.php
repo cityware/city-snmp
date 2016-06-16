@@ -19,7 +19,7 @@ if (substr($sysDescr, 0, 6) == 'Linux ') {
     $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
     $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
 }
-if ($os == 'linux') {
+if (isset($os) and $os == 'linux') {
     if (strstr($sysDescr, 'endian')) {
         $this->setOs('Endian');
     } elseif (preg_match('/Cisco Small Business/', $sysDescr)) {
