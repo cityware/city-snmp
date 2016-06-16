@@ -1,6 +1,6 @@
 <?php
 
-if (strstr($sysDescr, 'EPSON Built-in')) {
+if (preg_match('/^EPSON Built-in/', $sysDescr)) {
     $this->setVendor('EPSON Corporation');
     $this->setModel('Generic');
     $this->setOs('EPSON');

@@ -1,5 +1,6 @@
 <?php
-if (strstr($sysDescr, 'Pulse Connect Secure')) {
+
+if (preg_match('/^Pulse Connect Secure/', $sysDescr)) {
     $this->setVendor('Pulse Secure');
     $this->setModel('Generic');
     $this->setOs('Pulse');

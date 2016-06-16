@@ -1,6 +1,6 @@
 <?php
 
-if (stristr($sysDescr, 'Powercode BMU')) {
+if (preg_match('/^Powercode BMU/', $sysDescr)) {
     $this->setVendor('Powercode');
     $this->setModel('Generic');
     $this->setOs('Powercode');

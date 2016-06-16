@@ -1,6 +1,6 @@
 <?php
 
-if (strstr($sysDescr, 'Deliberant')) {
+if (preg_match('/^Deliberant/', $sysDescr)) {
 
     $this->setVendor('LigoWave');
     $this->setModel('Generic');
@@ -11,7 +11,7 @@ if (strstr($sysDescr, 'Deliberant')) {
     $this->setModel('Generic');
     $this->setOs('Infinity');
 } else if (preg_match('/^LigoPTP/', $sysDescr)) {
-    
+
     $this->setVendor('LigoWave');
     $this->setModel('Generic');
     $this->setOs('Ligo OS');

@@ -20,8 +20,8 @@ if (substr($sysDescr, 0, 6) == 'Linux ') {
     $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
 }
 if (isset($os) and $os == 'linux') {
-    if (strstr($sysDescr, 'endian')) {
-        $this->setOs('Endian');
+    if (preg_match('/^endian/', $sysDescr)) {
+        $this->setOs('Endian Linux');
     } elseif (preg_match('/Cisco Small Business/', $sysDescr)) {
         $this->setOs('Cisco Smb Linux');
     } else {

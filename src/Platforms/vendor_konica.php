@@ -1,5 +1,6 @@
 <?php
-if (strstr($sysDescr, 'KONICA MINOLTA ')) {
+
+if (preg_match('/^KONICA MINOLTA/', $sysDescr)) {
     $this->setVendor('Konica Minolta');
     $this->setModel('Generic');
     $this->setOs('Konica');
