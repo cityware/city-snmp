@@ -65,7 +65,7 @@ class Iface extends \Cityware\Snmp\MIB {
         $aReturn = Array();
         $aReturn['index'] = $aInterface[self::OID_IF_INDEX];
         $aReturn['description'] = $aInterface[self::OID_IF_DESCRIPTION];
-        $aReturn['type'] = $aInterface[self::OID_IF_TYPE];
+        $aReturn['type'] = $this->getSNMP()->translate($aInterface[self::OID_IF_TYPE], self::$IF_TYPES);
         $aReturn['mtu'] = $aInterface[self::OID_IF_MTU];
         $aReturn['speed'] = $aInterface[self::OID_IF_SPEED];
         $aReturn['phys_address'] = $aInterface[self::OID_IF_PHYS_ADDRESS];
