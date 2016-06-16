@@ -20,8 +20,8 @@ if (substr($sysDescr, 0, 12) == 'Dell Force10 ') {
     } catch (Exception $e) {
         $this->setSerialNumber('(error)');
     }
-} else if (strstr($sysDescr, 'Dell Color Laser') or strstr($sysDescr, 'Dell Laser Printer') or preg_match('/^Dell.*MFP/', $sysDescr)) {
+} else if (preg_match('/^Dell Color Laser/', $sysDescr) or preg_match('/^Dell Laser Printer/', $sysDescr) or preg_match('/^Dell.*MFP/', $sysDescr)) {
     $this->setVendor('Dell');
     $this->setModel('Dell Laser Printer');
-    $this->setOs('Dell Laser');
+    $this->setOs('Dell Printer');
 }

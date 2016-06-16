@@ -1,6 +1,5 @@
 <?php
-
-if (strstr($sysDescr, 'Ethernet Routing Switch') or strstr($sysDescr, 'ERS-')) {
+if (preg_match('/^Ethernet Routing Switch/', $sysDescr) or preg_match('/^ERS-/', $sysDescr)) {
     $this->setVendor('Avaya');
     $this->setModel('Generic');
     $this->setOs('Avaya ERS');

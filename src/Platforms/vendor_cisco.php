@@ -48,11 +48,11 @@ if (substr($sysDescr, 0, 18) == 'Cisco IOS Software') {
     $this->setVendor('Cisco Systems');
     $this->setModel('Generic');
     $this->setOs('Meraki MR');
-} else if (strstr($sysDescr, 'NX-OS(tm)')) {
+} else if (preg_match('/^NX-OS(tm)/', $sysDescr)) {
     $this->setVendor('Cisco Systems');
     $this->setModel('Generic');
     $this->setOs('NX-OS');
-} else if (strstr($sysDescr, 'SAN-OS')) {
+} else if (preg_match('/^SAN-OS/', $sysDescr)) {
     $this->setVendor('Cisco Systems');
     $this->setModel('Generic');
     $this->setOs('SAN-OS');

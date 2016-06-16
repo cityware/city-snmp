@@ -1,5 +1,5 @@
 <?php
-if (strstr($sysDescr, 'PacketShaper')) {
+if (preg_match('/^PacketShaper/', $sysDescr)) {
     $this->setVendor('Blue Coat');
     $this->setModel('Generic');
     $this->setOs('PacketShaper');
