@@ -6,32 +6,36 @@ namespace Cityware\Snmp\MIBS;
  * A class for performing SNMP V2 queries on generic devices
  */
 class Iface extends \Cityware\Snmp\MIB {
+    
+    const OID_IF_Entry =                       '.1.3.6.1.2.1.2.2.1';
+    const OID_IF_XEntry =                      '.1.3.6.1.2.1.31.1.1.1';
 
-    const OID_IF_NUMBER = '.1.3.6.1.2.1.2.1.0';
-    const OID_IF_INDEX = '.1.3.6.1.2.1.2.2.1.1';
-    const OID_IF_DESCRIPTION = '.1.3.6.1.2.1.2.2.1.2';
-    const OID_IF_TYPE = '.1.3.6.1.2.1.2.2.1.3';
-    const OID_IF_MTU = '.1.3.6.1.2.1.2.2.1.4';
-    const OID_IF_SPEED = '.1.3.6.1.2.1.2.2.1.5';
-    const OID_IF_PHYS_ADDRESS = '.1.3.6.1.2.1.2.2.1.6';
-    const OID_IF_ADMIN_STATUS = '.1.3.6.1.2.1.2.2.1.7';
-    const OID_IF_OPER_STATUS = '.1.3.6.1.2.1.2.2.1.8';
-    const OID_IF_LAST_CHANGE = '.1.3.6.1.2.1.2.2.1.9';
-    const OID_IF_IN_OCTETS = '.1.3.6.1.2.1.2.2.1.10';
-    const OID_IF_IN_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.11';
-    const OID_IF_IN_NON_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.12';
-    const OID_IF_IN_DISCARDS = '.1.3.6.1.2.1.2.2.1.13';
-    const OID_IF_IN_ERRORS = '.1.3.6.1.2.1.2.2.1.14';
-    const OID_IF_IN_UNKNOWN_PROTOCOLS = '.1.3.6.1.2.1.2.2.1.15';
-    const OID_IF_OUT_OCTETS = '.1.3.6.1.2.1.2.2.1.16';
-    const OID_IF_OUT_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.17';
-    const OID_IF_OUT_NON_UNICAST_PACKETS = '.1.3.6.1.2.1.2.2.1.18';
-    const OID_IF_OUT_DISCARDS = '.1.3.6.1.2.1.2.2.1.19';
-    const OID_IF_OUT_ERRORS = '.1.3.6.1.2.1.2.2.1.20';
-    const OID_IF_OUT_QUEUE_LENGTH = '.1.3.6.1.2.1.2.2.1.21';
-    const OID_IF_NAME = '.1.3.6.1.2.1.31.1.1.1.1';
-    const OID_IF_HIGH_SPEED = '.1.3.6.1.2.1.31.1.1.1.15';
-    const OID_IF_ALIAS = '.1.3.6.1.2.1.31.1.1.1.18';
+    const OID_IF_NUMBER =                       '.1.3.6.1.2.1.2.1.0';
+    const OID_IF_INDEX =                        '.1.3.6.1.2.1.2.2.1.1';
+    const OID_IF_DESCRIPTION =                  '.1.3.6.1.2.1.2.2.1.2';
+    const OID_IF_TYPE =                         '.1.3.6.1.2.1.2.2.1.3';
+    const OID_IF_MTU =                          '.1.3.6.1.2.1.2.2.1.4';
+    const OID_IF_SPEED =                        '.1.3.6.1.2.1.2.2.1.5';
+    const OID_IF_PHYS_ADDRESS =                 '.1.3.6.1.2.1.2.2.1.6';
+    const OID_IF_ADMIN_STATUS =                 '.1.3.6.1.2.1.2.2.1.7';
+    const OID_IF_OPER_STATUS =                  '.1.3.6.1.2.1.2.2.1.8';
+    const OID_IF_LAST_CHANGE =                  '.1.3.6.1.2.1.2.2.1.9';
+    const OID_IF_IN_OCTETS =                    '.1.3.6.1.2.1.2.2.1.10';
+    const OID_IF_IN_UNICAST_PACKETS =           '.1.3.6.1.2.1.2.2.1.11';
+    const OID_IF_IN_NON_UNICAST_PACKETS =       '.1.3.6.1.2.1.2.2.1.12';
+    const OID_IF_IN_DISCARDS =                  '.1.3.6.1.2.1.2.2.1.13';
+    const OID_IF_IN_ERRORS =                    '.1.3.6.1.2.1.2.2.1.14';
+    const OID_IF_IN_UNKNOWN_PROTOCOLS =         '.1.3.6.1.2.1.2.2.1.15';
+    const OID_IF_OUT_OCTETS =                   '.1.3.6.1.2.1.2.2.1.16';
+    const OID_IF_OUT_UNICAST_PACKETS =          '.1.3.6.1.2.1.2.2.1.17';
+    const OID_IF_OUT_NON_UNICAST_PACKETS =      '.1.3.6.1.2.1.2.2.1.18';
+    const OID_IF_OUT_DISCARDS =                 '.1.3.6.1.2.1.2.2.1.19';
+    const OID_IF_OUT_ERRORS =                   '.1.3.6.1.2.1.2.2.1.20';
+    const OID_IF_OUT_QUEUE_LENGTH =             '.1.3.6.1.2.1.2.2.1.21';
+    const OID_IF_NAME =                         '.1.3.6.1.2.1.31.1.1.1.1';
+    const OID_IF_HIGH_SPEED =                   '.1.3.6.1.2.1.31.1.1.1.15';
+    const OID_IF_ALIAS =                        '.1.3.6.1.2.1.31.1.1.1.18';
+    
     const OID_IF_IN_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.2';  // no fn() implemented
     const OID_IF_IN_BROADCAST = '.1.3.6.1.2.1.31.1.1.1.3';  // no fn() implemented
     const OID_IF_OUT_MULTICAST = '.1.3.6.1.2.1.31.1.1.1.4';  // no fn() implemented
@@ -48,6 +52,45 @@ class Iface extends \Cityware\Snmp\MIB {
     const OID_IF_PROMISCUOUS_MODE = '.1.3.6.1.2.1.31.1.1.1.16'; // no fn() implemented
     const OID_IF_CONNECTOR_PRESENT = '.1.3.6.1.2.1.31.1.1.1.17'; // no fn() implemented
     const OID_IF_COUNTER_DISCONTINUTIY = '.1.3.6.1.2.1.31.1.1.1.19'; // no fn() implemented
+    
+    /**
+     * Returns Full Data
+     * @return int
+     */
+    public function returnFullData() {
+        
+        $aInterface = $this->getSNMP()->realWalk1d(self::OID_IF_Entry);
+        $aXInterface = $this->getSNMP()->realWalk1d(self::OID_IF_XEntry);
+        
+        $aReturn = Array();
+        $aReturn['index'] = $aInterface[self::OID_IF_INDEX];
+        $aReturn['description'] = $aInterface[self::OID_IF_DESCRIPTION];
+        $aReturn['type'] = $aInterface[self::OID_IF_TYPE];
+        $aReturn['mtu'] = $aInterface[self::OID_IF_MTU];
+        $aReturn['speed'] = $aInterface[self::OID_IF_SPEED];
+        $aReturn['phys_address'] = $aInterface[self::OID_IF_PHYS_ADDRESS];
+        $aReturn['admin_status'] = $this->getSNMP()->translate($aInterface[self::OID_IF_ADMIN_STATUS], self::$IF_ADMIN_STATES);
+        $aReturn['oper_status'] = $this->getSNMP()->translate($aInterface[self::OID_IF_OPER_STATUS], self::$IF_ADMIN_STATES);
+        $aReturn['last_change'] = $aInterface[self::OID_IF_LAST_CHANGE];
+        $aReturn['in_octets'] = $aInterface[self::OID_IF_IN_OCTETS];
+        $aReturn['in_unicast_packets'] = $aInterface[self::OID_IF_IN_UNICAST_PACKETS];
+        $aReturn['in_non_unicast_packets'] = $aInterface[self::OID_IF_IN_NON_UNICAST_PACKETS];
+        $aReturn['in_discards'] = $aInterface[self::OID_IF_IN_DISCARDS];
+        $aReturn['in_errors'] = $aInterface[self::OID_IF_IN_ERRORS];
+        $aReturn['in_unknown_protocols'] = $aInterface[self::OID_IF_IN_UNKNOWN_PROTOCOLS];
+        $aReturn['out_octets'] = $aInterface[self::OID_IF_OUT_OCTETS];
+        $aReturn['out_unicast_packets'] = $aInterface[self::OID_IF_OUT_UNICAST_PACKETS];
+        $aReturn['out_non_unicast_packets'] = $aInterface[self::OID_IF_OUT_NON_UNICAST_PACKETS];
+        $aReturn['out_discards'] = $aInterface[self::OID_IF_OUT_DISCARDS];
+        $aReturn['out_errors'] = $aInterface[self::OID_IF_OUT_ERRORS];
+        $aReturn['out_queue_length'] = $aInterface[self::OID_IF_OUT_QUEUE_LENGTH];
+        
+        $aReturn['name'] = $aXInterface[self::OID_IF_NAME];
+        $aReturn['high_speed'] = $aXInterface[self::OID_IF_HIGH_SPEED];
+        $aReturn['alias'] = $aXInterface[self::OID_IF_ALIAS];
+        
+        return $aReturn;
+    }
 
     /**
      * Get the number of network interfaces (regardless of
@@ -2211,8 +2254,9 @@ class Iface extends \Cityware\Snmp\MIB {
     public function types($translate = false) {
         $types = $this->getSNMP()->walk1d(self::OID_IF_TYPE);
 
-        if (!$translate)
+        if (!$translate){
             return $types;
+        }
 
         return $this->getSNMP()->translate($types, self::$IF_TYPES);
     }
