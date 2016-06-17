@@ -56,7 +56,7 @@ class Iface extends \Cityware\Snmp\MIB {
     /**
      * Returns Full Data
      * @return int
-     */
+     */ 
     public function returnFullData() {
         
         $aInterface = $this->getSNMP()->realWalk1d(self::OID_IF_Entry);
