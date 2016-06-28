@@ -12,7 +12,7 @@ class Memory extends \Cityware\Snmp\MIB {
     const OID_TOTAL_SWAP_SIZE = '.1.3.6.1.4.1.2021.4.3';
     const OID_AVALIABLE_SWAP_SIZE = '.1.3.6.1.4.1.2021.4.4';
     const OID_TOTAL_RAM_IN_MACHINE = '.1.3.6.1.4.1.2021.4.5';
-    const OID_TOTAL_RAM_USED = '.1.3.6.1.4.1.2021.4.6';
+    const OID_TOTAL_RAM_AVALIABLE = '.1.3.6.1.4.1.2021.4.6';
     const OID_TOTAL_RAM_FREE = '.1.3.6.1.4.1.2021.4.11';
     const OID_TOTAL_RAM_SHARED = '.1.3.6.1.4.1.2021.4.13';
     const OID_TOTAL_RAM_BUFFERED = '.1.3.6.1.4.1.2021.4.14';
@@ -30,7 +30,7 @@ class Memory extends \Cityware\Snmp\MIB {
         $aReturn['total_swap_size'] = $aMemory[self::OID_TOTAL_SWAP_SIZE][0];
         $aReturn['avaliable_swap_size'] = $aMemory[self::OID_AVALIABLE_SWAP_SIZE][0];
         $aReturn['total_ram_machine'] = $aMemory[self::OID_TOTAL_RAM_IN_MACHINE][0];
-        $aReturn['total_ram_used'] = $aMemory[self::OID_TOTAL_RAM_USED][0];
+        $aReturn['total_ram_avaliable'] = $aMemory[self::OID_TOTAL_RAM_AVALIABLE][0];
         $aReturn['toral_ram_free'] = $aMemory[self::OID_TOTAL_RAM_FREE][0];
         $aReturn['total_ram_shared'] = $aMemory[self::OID_TOTAL_RAM_SHARED][0];
         $aReturn['total_ram_buffered'] = $aMemory[self::OID_TOTAL_RAM_BUFFERED][0];
