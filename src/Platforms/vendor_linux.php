@@ -8,16 +8,18 @@
 
 if (substr($sysDescr, 0, 6) == 'Linux ') {
     $matches = explode(" ", $sysDescr);
+
     if ($matches[4] == 'SMP') {
         $this->setVendor('Cumulus Networks');
+        $this->setModel($matches[5]);
     } else {
         $this->setVendor($matches[4]);
+        $this->setModel('Generic');
+        $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
+        $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
     }
     $os = 'linux';
-    $this->setModel('Generic');
     $this->setOsVersion($matches[2]);
-    $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
-    $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
 }
 if (isset($os) and $os == 'linux') {
     if (preg_match('/^endian/', $sysDescr)) {
