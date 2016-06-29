@@ -227,4 +227,19 @@ class Platform {
         return $this->_serial;
     }
 
+    /**
+     * Return all data witch platform
+     * @return array
+     */
+    public function getAllData() {
+        $aReturn = Array();
+        foreach (get_class_vars(get_class()) as $keyVars => $valueVars) {
+            if ($keyVars != '_snmpHost') {
+                $indexVar = str_replace('_', '', $keyVars);
+                $aReturn[$indexVar] = $this->{$keyVars};
+            }
+        }
+        return $aReturn;
+    }
+
 }
