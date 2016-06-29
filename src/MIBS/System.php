@@ -133,7 +133,7 @@ class System extends \Cityware\Snmp\MIB {
         $system['description'] = $this->description();
         $system['location'] = $this->location();
         $system['name'] = $this->name();
-        $system['services'] = $this->services();
+        //$system['services'] = $this->services();
         $system['uptime'] = $this->uptime();
 
         return $system;
