@@ -15,8 +15,6 @@ if (substr($sysDescr, 0, 6) == 'Linux ') {
     } else {
         $this->setVendor($matches[4]);
         $this->setModel('Generic');
-        $this->setOsDate(new \DateTime("{$matches[7]}/{$matches[6]}/{$matches[10]}:{$matches[8]} +0000"));
-        $this->getOsDate()->setTimezone(new \DateTimeZone($matches[9]));
     }
     $os = 'linux';
     $this->setOsVersion($matches[2]);
