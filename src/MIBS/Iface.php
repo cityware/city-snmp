@@ -10,6 +10,8 @@ class Iface extends \Cityware\Snmp\MIB {
     const OID_IF_Entry = '.1.3.6.1.2.1.2.2.1';
     const OID_IF_XEntry = '.1.3.6.1.2.1.31.1.1.1';
     const OID_IF_IP_ADDRESS = '.1.3.6.1.2.1.4.20.1.1';
+    const OID_IF_IP_ADDRESS_INDEX = '.1.3.6.1.2.1.4.20.1.2';
+    const OID_IF_IP_ADDRESS_MASK = '.1.3.6.1.2.1.4.20.1.3';
     const OID_IF_NUMBER = '.1.3.6.1.2.1.2.1.0';
     const OID_IF_INDEX = '.1.3.6.1.2.1.2.2.1.1';
     const OID_IF_DESCRIPTION = '.1.3.6.1.2.1.2.2.1.2';
@@ -64,17 +66,21 @@ class Iface extends \Cityware\Snmp\MIB {
         $aInterface = $this->getSNMP()->realWalk1d(self::OID_IF_Entry);
         $aXInterface = $this->getSNMP()->realWalk1d(self::OID_IF_XEntry);
 
-
         $aInterfaceIp = $this->getSNMP()->realWalk1d(self::OID_IF_IP_ADDRESS);
-
-
-        $aInterfaceIpAddress = Array();
-        $ifCounter = 1;
-        foreach ($aInterfaceIp as $valueInterfaceIp) {
+        $aInterfaceIpMask = $this->getSNMP()->realWalk1d(self::OID_IF_IP_ADDRESS_MASK);
+        $aInterfaceIpIndex = $this->getSNMP()->realWalk1d(self::OID_IF_IP_ADDRESS_INDEX);
+ 
+        $aInterfaceIpAddress = $aInterfaceMaskAddress = Array();
+        foreach ($aInterfaceIp as $keyInterfaceIp => $valueInterfaceIp) {
+            $keyIndex = str_replace('.1.3.6.1.2.1.4.20.1.1', '.1.3.6.1.2.1.4.20.1.2', $keyInterfaceIp);
+            $keyMask = str_replace('.1.3.6.1.2.1.4.20.1.1', '.1.3.6.1.2.1.4.20.1.3', $keyInterfaceIp);
+            $aKeyIndexReseted = array_values($aInterfaceIpIndex[$keyIndex]);
+            $aKeyMaskReseted = array_values($aInterfaceIpMask[$keyMask]);
             $aKeyReseted = array_values($valueInterfaceIp);
-            $aInterfaceIpAddress[$ifCounter] = $aKeyReseted[0];
-            $ifCounter++;
+            $aInterfaceIpAddress[$aKeyIndexReseted[0]][] = $aKeyReseted[0];
+            $aInterfaceMaskAddress[$aKeyIndexReseted[0]][] = $aKeyMaskReseted[0];
         }
+
         $aReturn['index'] = $aInterface[self::OID_IF_INDEX];
         $aReturn['description'] = $aInterface[self::OID_IF_DESCRIPTION];
         $aReturn['type'] = $aInterface[self::OID_IF_TYPE];
@@ -83,7 +89,7 @@ class Iface extends \Cityware\Snmp\MIB {
         $aReturn['speed'] = $aInterface[self::OID_IF_SPEED];
         $aReturn['phys_address'] = $aInterface[self::OID_IF_PHYS_ADDRESS];
         $aReturn['ip_address'] = $aInterfaceIpAddress;
-
+        $aReturn['mask_address'] = $aInterfaceMaskAddress;
         $aReturn['admin_status'] = $aInterface[self::OID_IF_ADMIN_STATUS];
         $aReturn['admin_status_desc'] = $this->getSNMP()->translate($aInterface[self::OID_IF_ADMIN_STATUS], self::$IF_ADMIN_STATES);
         $aReturn['oper_status'] = $aInterface[self::OID_IF_OPER_STATUS];
