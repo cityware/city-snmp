@@ -32,7 +32,7 @@ class Memory extends \Cityware\Snmp\MIB {
         $aReturn['total_memory'] = $aMemory[self::OID_TOTAL_MEMORY][0];
         $aReturn['total_ram_buffered'] = $aMemory[self::OID_TOTAL_RAM_BUFFERED][0];
         $aReturn['total_cached_memory'] = $aMemory[self::OID_TOTAL_CACHED_MEMORY][0];
-        $aReturn['total_memory_used'] = $aReturn['total_ram_machine'] - $aReturn['avaliable_ram_real'];
+        $aReturn['total_memory_used'] = $aReturn['total_ram_machine'] - ($aReturn['avaliable_ram_real'] + $aReturn['total_cached_memory'] + $aReturn['total_ram_buffered']);
         $aReturn['perc_memory_used'] = round((($aReturn['total_memory_used'] * 100) / $aReturn['total_ram_machine']), 2);
         if ($aReturn['avaliable_swap_size'] < $aReturn['total_swap_size']) {
             $aReturn['perc_swap_used'] = round((($aReturn['avaliable_swap_size'] * 100) / $aReturn['total_swap_size']), 2);

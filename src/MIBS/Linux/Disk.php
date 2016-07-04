@@ -7,9 +7,9 @@ namespace Cityware\Snmp\MIBS\Linux;
  */
 class Disk extends \Cityware\Snmp\MIB {
     
+    /** Disk Data **/
     const OID_DISK = '.1.3.6.1.4.1.2021.9.1';
-    const OID_DISK_IO = '.1.3.6.1.4.1.2021.13.15.1.1';
-
+    
     const OID_DISK_INDEX = '.1.3.6.1.4.1.2021.9.1.1';
     const OID_DISK_PATH = '.1.3.6.1.4.1.2021.9.1.2';
     const OID_DISK_DEVICE = '.1.3.6.1.4.1.2021.9.1.3';
@@ -29,6 +29,47 @@ class Disk extends \Cityware\Snmp\MIB {
     
     const OID_DISK_ERROR_FLAG = '.1.3.6.1.4.1.2021.9.1.100';
     const OID_DISK_ERROR_MSG = '.1.3.6.1.4.1.2021.9.1.101';
+    
+    /** Disk IO **/
+    const OID_DISK_IO = '.1.3.6.1.4.1.2021.13.15.1.1';
+    
+    const OID_DISK_IO_INDEX = '.1.3.6.1.4.1.2021.13.15.1.1.1';
+    const OID_DISK_IO_DEVICE = '.1.3.6.1.4.1.2021.13.15.1.1.2';
+    const OID_DISK_IO_READ = '.1.3.6.1.4.1.2021.13.15.1.1.3';
+    const OID_DISK_IO_WRITE = '.1.3.6.1.4.1.2021.13.15.1.1.4';
+    const OID_DISK_IO_READ_ACCESS = '.1.3.6.1.4.1.2021.13.15.1.1.5';
+    const OID_DISK_IO_WRITE_ACCESS = '.1.3.6.1.4.1.2021.13.15.1.1.6';
+    const OID_DISK_IO_LOAD1MIN = '.1.3.6.1.4.1.2021.13.15.1.1.9';
+    const OID_DISK_IO_LOAD5MIN = '.1.3.6.1.4.1.2021.13.15.1.1.10';
+    const OID_DISK_IO_LOAD15MIN = '.1.3.6.1.4.1.2021.13.15.1.1.11';
+    const OID_DISK_IO_READX = '.1.3.6.1.4.1.2021.13.15.1.1.12';
+    const OID_DISK_IO_WRITEX = '.1.3.6.1.4.1.2021.13.15.1.1.13';
+    
+    /**
+     * Returns Full Data Io
+     * @return int
+     */
+    public function returnFullDataIo() {
+        
+        $aDiskIo = $this->getSNMP()->realWalk1d(self::OID_DISK_IO);
+        
+        
+        $aReturn = Array();
+        $aReturn['index'] = $aDiskIo[self::OID_DISK_IO_INDEX];
+        $aReturn['device'] = $aDiskIo[self::OID_DISK_IO_DEVICE];
+        $aReturn['disk_io_read'] = $aDiskIo[self::OID_DISK_IO_READ];
+        $aReturn['disk_io_write'] = $aDiskIo[self::OID_DISK_IO_WRITE];
+        $aReturn['disk_io_read_access'] = $aDiskIo[self::OID_DISK_IO_READ_ACCESS];
+        $aReturn['disk_io_write_access'] = $aDiskIo[self::OID_DISK_IO_WRITE_ACCESS];
+        $aReturn['disk_io_load1Min'] = $aDiskIo[self::OID_DISK_IO_LOAD1MIN];
+        $aReturn['disk_io_load5Min'] = $aDiskIo[self::OID_DISK_IO_LOAD5MIN];
+        $aReturn['disk_io_load15Min'] = $aDiskIo[self::OID_DISK_IO_LOAD15MIN];
+        $aReturn['disk_io_readx'] = $aDiskIo[self::OID_DISK_IO_READX];
+        $aReturn['disk_io_writex'] = $aDiskIo[self::OID_DISK_IO_WRITEX];
+        $aReturn['counter_max_value'] = 4294967295;
+        
+        return $aReturn;
+    }
     
     /**
      * Returns Full Data
@@ -62,6 +103,8 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['disk_io'] = $aDiskIo;
         return $aReturn;
     }
+    
+    
 
     /**
      * Calculation Free Percent Disk Path
