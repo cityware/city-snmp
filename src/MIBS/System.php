@@ -9,7 +9,7 @@ class System extends \Cityware\Snmp\MIB {
 
     const OID_SYSTEM_DESCRIPTION = '.1.3.6.1.2.1.1.1.0';
     const OID_SYSTEM_OBJECT_ID = '.1.3.6.1.2.1.1.2.0';
-    const OID_SYSTEM_UPTIME = '.1.3.6.1.2.1.25.1.1.0';
+    const OID_SYSTEM_UPTIME = '.1.3.6.1.2.1.1.3.0';    
     const OID_SYSTEM_CONTACT = '.1.3.6.1.2.1.1.4.0';
     const OID_SYSTEM_NAME = '.1.3.6.1.2.1.1.5.0';
     const OID_SYSTEM_LOCATION = '.1.3.6.1.2.1.1.6.0';

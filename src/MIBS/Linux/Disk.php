@@ -8,6 +8,7 @@ namespace Cityware\Snmp\MIBS\Linux;
 class Disk extends \Cityware\Snmp\MIB {
     
     const OID_DISK = '.1.3.6.1.4.1.2021.9.1';
+    const OID_DISK_IO = '.1.3.6.1.4.1.2021.13.15.1.1';
 
     const OID_DISK_INDEX = '.1.3.6.1.4.1.2021.9.1.1';
     const OID_DISK_PATH = '.1.3.6.1.4.1.2021.9.1.2';
@@ -36,6 +37,7 @@ class Disk extends \Cityware\Snmp\MIB {
     public function returnFullData() {
         
         $aDisk = $this->getSNMP()->realWalk1d(self::OID_DISK);
+        $aDiskIo = $this->getSNMP()->realWalk1d(self::OID_DISK_IO);
         
         $aReturn = Array();
         $aReturn['index'] = $aDisk[self::OID_DISK_INDEX];
@@ -57,6 +59,7 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['used_high'] = $aDisk[self::OID_DISK_USED_HIGH];
         $aReturn['error_flag'] = $aDisk[self::OID_DISK_ERROR_FLAG];
         $aReturn['error_msg'] = $aDisk[self::OID_DISK_ERROR_MSG];
+        $aReturn['disk_io'] = $aDiskIo;
         return $aReturn;
     }
 
@@ -217,7 +220,13 @@ class Disk extends \Cityware\Snmp\MIB {
         return $this->getSNMP()->walk1d(self::OID_DISK_ERROR_MSG);
     }
     
-    
+    /**
+     * Returns A text description providing a warning and the space left on the disk
+     * @return int
+     */
+    public function diskIo() {
+        return $this->getSNMP()->realWalk1d(self::OID_DISK_IO);
+    }
     
     
 }
