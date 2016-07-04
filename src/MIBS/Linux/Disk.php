@@ -46,9 +46,8 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['total_size'] = $aDisk[self::OID_DISK_TOTAL];
         $aReturn['avaliable_size'] = $aDisk[self::OID_DISK_AVALIABLE];
         $aReturn['used_size'] = $aDisk[self::OID_DISK_USED];
-        
         $aReturn['used_percent'] = $aDisk[self::OID_DISK_USED_PERCENT];
-        $aReturn['free_percent'] = ($aReturn['used_percent'] > 0) ? (100 - $aReturn['used_percent']): 100;
+        $aReturn['free_percent'] = $this->freePercentCalculation($aReturn['used_percent']);
         $aReturn['node_percent'] = $aDisk[self::OID_DISK_NODE_PERCENT];
         $aReturn['total_low'] = $aDisk[self::OID_DISK_TOTAL_LOW];
         $aReturn['total_high'] = $aDisk[self::OID_DISK_TOTAL_HIGH];
@@ -58,6 +57,19 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['used_high'] = $aDisk[self::OID_DISK_USED_HIGH];
         $aReturn['error_flag'] = $aDisk[self::OID_DISK_ERROR_FLAG];
         $aReturn['error_msg'] = $aDisk[self::OID_DISK_ERROR_MSG];
+        return $aReturn;
+    }
+
+    /**
+     * Calculation Free Percent Disk Path
+     * @param array $usedPercent
+     * @return array
+     */
+    private function freePercentCalculation(array $usedPercent = array()) {
+        $aReturn = array();
+        foreach ($usedPercent as $keyUsedPercent => $valueUsedPercent) {
+            $aReturn[$keyUsedPercent] = ($valueUsedPercent > 0) ? (100 - $valueUsedPercent): 100;
+        }
         return $aReturn;
     }
 
