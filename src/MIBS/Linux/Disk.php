@@ -48,6 +48,7 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['used_size'] = $aDisk[self::OID_DISK_USED];
         
         $aReturn['used_percent'] = $aDisk[self::OID_DISK_USED_PERCENT];
+        $aReturn['free_percent'] = 100 - $aReturn['used_percent'];
         $aReturn['node_percent'] = $aDisk[self::OID_DISK_NODE_PERCENT];
         $aReturn['total_low'] = $aDisk[self::OID_DISK_TOTAL_LOW];
         $aReturn['total_high'] = $aDisk[self::OID_DISK_TOTAL_HIGH];

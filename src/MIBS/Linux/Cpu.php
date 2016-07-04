@@ -10,15 +10,19 @@ class Cpu extends \Cityware\Snmp\MIB {
     const OID_CPU = '.1.3.6.1.4.1.2021.11';
     const OID_LOAD = '.1.3.6.1.4.1.2021.10.1.3';
     const OID_LOAD_INT = '.1.3.6.1.4.1.2021.10.1.5';
+
     const OID_1_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.1';
     const OID_5_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.2';
     const OID_15_MINUTE_LOAD = '.1.3.6.1.4.1.2021.10.1.3.3';
-    const OID_UCD_SNMPD_LALOAD_INT_1 = '.1.3.6.1.4.1.2021.10.1.5.1';
+        
+    const OID_UCD_SNMPD_LALOAD_INT_1  = '.1.3.6.1.4.1.2021.10.1.5.1';
     const OID_UCD_SNMPD_LALOAD_INT_5 = '.1.3.6.1.4.1.2021.10.1.5.2';
     const OID_UCD_SNMPD_LALOAD_INT_15 = '.1.3.6.1.4.1.2021.10.1.5.3';
+    
     const OID_PERCENTAGE_OF_USER_CPU_TIME = '.1.3.6.1.4.1.2021.11.9.0';
     const OID_PERCENTAGES_OF_SYSTEM_CPU_TIME = '.1.3.6.1.4.1.2021.11.10.0';
     const OID_PERCENTAGES_OF_IDLE_CPU_TIME = '.1.3.6.1.4.1.2021.11.10.0';
+    
     const OID_RAW_USER_CPU_TIME = '.1.3.6.1.4.1.2021.11.50.0';
     const OID_RAW_NICE_CPU_TIME = '.1.3.6.1.4.1.2021.11.51.0';
     const OID_RAW_SYSTEM_CPU_TIME = '.1.3.6.1.4.1.2021.11.52.0';
@@ -135,7 +139,7 @@ class Cpu extends \Cityware\Snmp\MIB {
      * @param string $ht
      * @return array
      */
-    public function threshoudCalculation($numSlots = 1, $numCores = 1, $ht = 'N') {
+    public function threshoudCalculation($numSlots = 1, $numCores = 1, $ht= 'N') {
         $totalCpu = ($ht == 'S') ? (($numSlots * $numCores) * 2) : ($numSlots * $numCores);
 
         $aReturn = Array();
@@ -151,6 +155,6 @@ class Cpu extends \Cityware\Snmp\MIB {
         $aReturn['critical']['load15min'] = round(($totalCpu * 0.8), 2);
 
         return $aReturn;
-    }
 
+}
 }
