@@ -166,17 +166,24 @@ class SNMP {
     public function realWalk($oid) {
         switch ($this->getVersion()) {
             case 1:
-                return $this->_lastResult = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
+            case '1':
+                $return = $this->_lastResult = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 2:
+            case '2':
             case '2c':
-                return $this->_lastResult = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
+            case '2C':
+                $return = $this->_lastResult = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 3:
             case '3':
-                return $this->_lastResult = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
+                $return = $this->_lastResult = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
             default:
                 throw new Exception('Invalid SNMP version: ' . $this->getVersion());
         }
+        
+        return $return;
     }
 
     /**
@@ -188,11 +195,16 @@ class SNMP {
     public function realWalkToArray($oid) {
         switch ($this->getVersion()) {
             case 1:
+            case '1':
                 $result = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 2:
+            case '2':
             case '2c':
+            case '2C':
                 $result = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 3:
             case '3':
                 $result = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
@@ -212,9 +224,9 @@ class SNMP {
      * @return array
      */
     public function realWalk1d($oid) {
-        
+
         $arrayData = $this->realWalk($oid);
-        
+
         $result = array();
 
         foreach ($arrayData as $_oid => $value) {
@@ -245,11 +257,16 @@ class SNMP {
 
         switch ($this->getVersion()) {
             case 1:
+            case '1':
                 $this->_lastResult = @snmpget($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 2:
+            case '2':
             case '2c':
+            case '2C':
                 $this->_lastResult = @snmp2_get($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
                 break;
+            case 3:
             case '3':
                 $this->_lastResult = @snmp3_get($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry()
                 );
