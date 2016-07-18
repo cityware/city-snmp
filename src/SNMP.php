@@ -2,10 +2,20 @@
 
 namespace Cityware\Snmp;
 
+use \SNMP as PHPSnmp;
+use Exception;
+
 /**
  * A class for performing SNMP V2 queries and processing the results.
  */
 class SNMP {
+
+    /**
+     * The SNMP connection session to use when polling SNMP services.
+     *
+     * @var string The SNMP connection session.
+     */
+    protected $_session;
 
     /**
      * The SNMP community to use when polling SNMP services. Defaults to 'public' by the constructor.
@@ -145,16 +155,44 @@ class SNMP {
      * @return Cityware\Snmp An instance of $this (for fluent interfaces)
      */
     public function __construct($host = '127.0.0.1', $community = 'public', $version = '2c', $seclevel = 'noAuthNoPriv', $authprotocol = 'MD5', $authpassphrase = 'None', $privprotocol = 'DES', $privpassphrase = 'None') {
-        return $this->setHost($host)
-                        ->setCommunity($community)
-                        ->setVersion($version)
-                        ->setSecName($community)
-                        ->setSecLevel($seclevel)
-                        ->setAuthProtocol($authprotocol)
-                        ->setAuthPassphrase($authpassphrase)
-                        ->setPrivProtocol($privprotocol)
-                        ->setPrivPassphrase($privpassphrase)
-                        ->setOidOutputFormat(self::OID_OUTPUT_NUMERIC);
+
+        $this->setHost($host)
+                ->setCommunity($community)
+                ->setVersion($version)
+                ->setSecName($community)
+                ->setSecLevel($seclevel)
+                ->setAuthProtocol($authprotocol)
+                ->setAuthPassphrase($authpassphrase)
+                ->setPrivProtocol($privprotocol)
+                ->setPrivPassphrase($privpassphrase)
+                ->setOidOutputFormat(self::OID_OUTPUT_NUMERIC);
+
+
+        try {
+            switch ($this->getVersion()) {
+                case 1:
+                case '1':
+                    $this->_session = new PHPSnmp(PHPSnmp::VERSION_1, $this->getHost(), $this->getCommunity(), $this->getTimeout(), $this->getRetry());
+                    break;
+                case 2:
+                case '2':
+                case '2c':
+                case '2C':
+                    $this->_session = new PHPSnmp(PHPSnmp::VERSION_2C, $this->getHost(), $this->getCommunity(), $this->getTimeout(), $this->getRetry());
+                    break;
+                case 3:
+                case '3':
+                    $this->_session = new PHPSnmp(PHPSnmp::VERSION_3, $this->getHost(), $this->getCommunity(), $this->getTimeout(), $this->getRetry());
+                    $this->_session->setSecurity($this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase());
+                    break;
+                default:
+                    $this->close();
+                    throw new Exception('Invalid SNMP version: ' . $this->getVersion());
+            }
+        } catch (Exception $exc) {
+            $this->close();
+            throw new Exception("Erro '{$this->_session->getError()}' with execute connection SNMP: " . $exc->getMessage());
+        }
     }
 
     /**
@@ -164,25 +202,13 @@ class SNMP {
      * @return array The results of the walk
      */
     public function realWalk($oid) {
-        switch ($this->getVersion()) {
-            case 1:
-            case '1':
-                $return = $this->_lastResult = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 2:
-            case '2':
-            case '2c':
-            case '2C':
-                $return = $this->_lastResult = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 3:
-            case '3':
-                $return = $this->_lastResult = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            default:
-                throw new Exception('Invalid SNMP version: ' . $this->getVersion());
+        try {
+            $return = $this->_lastResult = $this->_session->walk($oid);
+        } catch (Exception $exc) {
+            $this->close();
+            throw new Exception("Erro '{$this->_session->getError()}' with execute WALK OID ({$oid}): " . $exc->getMessage());
         }
-        
+
         return $return;
     }
 
@@ -193,25 +219,10 @@ class SNMP {
      * @return array The results of the walk
      */
     public function realWalkToArray($oid) {
-        switch ($this->getVersion()) {
-            case 1:
-            case '1':
-                $result = @snmprealwalk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 2:
-            case '2':
-            case '2c':
-            case '2C':
-                $result = @snmp2_real_walk($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 3:
-            case '3':
-                $result = @snmp3_real_walk($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            default:
-                throw new Exception('Invalid SNMP version: ' . $this->getVersion());
-        }
-        foreach ($result as $_oid => $value) {
+
+        $arrayData = $this->realWalk($oid);
+
+        foreach ($arrayData as $_oid => $value) {
             $this->_lastResult[$_oid] = $this->parseSnmpValue($value);
         }
 
@@ -246,7 +257,7 @@ class SNMP {
     /**
      * Get a single SNMP value
      *
-     * @throws \Cityware\Snmp\Exception On *any* SNMP error, warnings are supressed and a generic exception is thrown
+     * @throws \Cityware\SnmpException On *any* SNMP error, warnings are supressed and a generic exception is thrown
      * @param string $oid The OID to get
      * @return mixed The resultant value
      */
@@ -255,27 +266,15 @@ class SNMP {
             return $rtn;
         }
 
-        switch ($this->getVersion()) {
-            case 1:
-            case '1':
-                $this->_lastResult = @snmpget($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 2:
-            case '2':
-            case '2c':
-            case '2C':
-                $this->_lastResult = @snmp2_get($this->getHost(), $this->getCommunity(), $oid, $this->getTimeout(), $this->getRetry());
-                break;
-            case 3:
-            case '3':
-                $this->_lastResult = @snmp3_get($this->getHost(), $this->getSecName(), $this->getSecLevel(), $this->getAuthProtocol(), $this->getAuthPassphrase(), $this->getPrivProtocol(), $this->getPrivPassphrase(), $oid, $this->getTimeout(), $this->getRetry()
-                );
-                break;
-            default:
-                throw new Exception('Invalid SNMP version: ' . $this->getVersion());
+        try {
+            $this->_lastResult = $this->_session->get($oid);
+        } catch (Exception $exc) {
+            $this->close();
+            throw new Exception("Erro '{$this->_session->getError()}' with execute GET OID ({$oid}): " . $exc->getMessage());
         }
 
         if ($this->_lastResult === false) {
+            $this->close();
             throw new Exception('Could not perform walk for OID ' . $oid);
         }
 
@@ -316,6 +315,7 @@ class SNMP {
         $this->_lastResult = $this->realWalk($oid);
 
         if ($this->_lastResult === false) {
+            $this->close();
             throw new Exception('Could not perform walk for OID ' . $oid);
         }
 
@@ -324,6 +324,7 @@ class SNMP {
         $oidPrefix = null;
         foreach ($this->_lastResult as $_oid => $value) {
             if ($oidPrefix !== null && $oidPrefix != substr($_oid, 0, strrpos($_oid, '.'))) {
+                $this->close();
                 throw new Exception('Requested OID tree is not a first degree indexed SNMP value');
             } else {
                 $oidPrefix = substr($_oid, 0, strrpos($_oid, '.'));
@@ -364,7 +365,7 @@ class SNMP {
      * 		[58.182.16] => Hex-STRING: 00 00 75 33 4E 93
      * 		[22.55.8]   => Hex-STRING: 00 00 75 33 4E 94
      *
-     * @throws \Cityware\Snmp\Exception On *any* SNMP error, warnings are supressed and a generic exception is thrown
+     * @throws \Cityware\SnmpException On *any* SNMP error, warnings are supressed and a generic exception is thrown
      * @param string $oid The OID to walk
      * @param int $position The position of the OID to use as the key
      * @param int $elements Number of additional elements to include in the returned array keys after $position.
@@ -382,6 +383,7 @@ class SNMP {
         $this->_lastResult = $this->realWalk($oid);
 
         if ($this->_lastResult === false) {
+            $this->close();
             throw new Exception('Could not perform walk for OID ' . $oid);
         }
 
@@ -417,7 +419,7 @@ class SNMP {
      *      [10.20.30.4] => "192.168.10.10"
      *      ....
      *
-     * @throws \Cityware\Snmp\Exception On *any* SNMP error, warnings are supressed and a generic exception is thrown
+     * @throws \Cityware\SnmpException On *any* SNMP error, warnings are supressed and a generic exception is thrown
      * @param string $oid The OID to walk
      * @return array The resultant values
      */
@@ -883,7 +885,7 @@ class SNMP {
         if (substr($method, 0, 3) == 'use') {
             return $this->useExtension(substr($method, 3), $args);
         }
-
+        $this->close();
         throw new Exception("ERR: Unknown method requested in magic __call(): $method\n");
     }
 
@@ -917,7 +919,7 @@ class SNMP {
     /**
      * Get indexed SNMP values where the array key is spread over a number of OID positions
      *
-     * @throws \Cityware\Snmp\Exception On *any* SNMP error, warnings are supressed and a generic exception is thrown
+     * @throws \Cityware\SnmpException On *any* SNMP error, warnings are supressed and a generic exception is thrown
      * @param string $oid The OID to walk
      * @param int $positionS The start position of the OID to use as the key
      * @param int $positionE The end position of the OID to use as the key
@@ -948,6 +950,10 @@ class SNMP {
         }
 
         return $this->getCache()->save($oid, $result);
+    }
+    
+    public function close() {
+        $this->_session->close();
     }
 
 }
