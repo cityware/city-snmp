@@ -218,9 +218,9 @@ class SNMP {
      * @param string $oid The OID to walk
      * @return array The results of the walk
      */
-    public function realWalkToArray($oid) {
+    public function realWalkToArray($oid, $suffixAsKey = false) {
 
-        $arrayData = $this->realWalk($oid);
+        $arrayData = $this->realWalk($oid, $suffixAsKey);
 
         foreach ($arrayData as $_oid => $value) {
             $this->_lastResult[$_oid] = $this->parseSnmpValue($value);
