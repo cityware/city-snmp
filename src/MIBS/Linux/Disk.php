@@ -64,8 +64,8 @@ class Disk extends \Cityware\Snmp\MIB {
         $aReturn['disk_io_load1Min'] = $aDiskIo[self::OID_DISK_IO_LOAD1MIN];
         $aReturn['disk_io_load5Min'] = $aDiskIo[self::OID_DISK_IO_LOAD5MIN];
         $aReturn['disk_io_load15Min'] = $aDiskIo[self::OID_DISK_IO_LOAD15MIN];
-        $aReturn['disk_io_readx'] = $aDiskIo[self::OID_DISK_IO_READX];
-        $aReturn['disk_io_writex'] = $aDiskIo[self::OID_DISK_IO_WRITEX];
+        //$aReturn['disk_io_readx'] = $aDiskIo[self::OID_DISK_IO_READX];
+        //$aReturn['disk_io_writex'] = $aDiskIo[self::OID_DISK_IO_WRITEX];
         $aReturn['counter_max_value'] = 4294967295;
         
         return $aReturn;
