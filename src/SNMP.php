@@ -201,9 +201,9 @@ class SNMP {
      * @param string $oid The OID to walk
      * @return array The results of the walk
      */
-    public function realWalk($oid) {
+    public function realWalk($oid, $suffixAsKey = false) {
         try {
-            $return = $this->_lastResult = $this->_session->walk($oid);
+            $return = $this->_lastResult = $this->_session->walk($oid, $suffixAsKey);
         } catch (Exception $exc) {
             $this->close();
             throw new Exception("Erro '{$this->_session->getError()}' with execute WALK OID ({$oid}): " . $exc->getMessage());
@@ -261,7 +261,7 @@ class SNMP {
      * @param string $oid The OID to get
      * @return mixed The resultant value
      */
-    public function get($oid) {
+    public function get($oid, $preserveKeys = false) {
         if ($this->cache() && ( $rtn = $this->getCache()->load($oid) ) !== null) {
             return $rtn;
         }
