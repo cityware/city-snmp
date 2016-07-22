@@ -267,7 +267,7 @@ class SNMP {
         }
 
         try {
-            $this->_lastResult = $this->_session->get($oid);
+            $this->_lastResult = $this->_session->get($oid, $preserveKeys);
         } catch (Exception $exc) {
             $this->close();
             throw new Exception("Erro '{$this->_session->getError()}' with execute GET OID ({$oid}): " . $exc->getMessage());
